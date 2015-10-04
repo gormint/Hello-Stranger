@@ -1,6 +1,5 @@
 var initialLocation;
 var browserSupportFlag =  new Boolean();  
-var map;
 
 function initMap() {
   var myOptions = {
@@ -21,6 +20,15 @@ function initMap() {
         map: map,
         title: 'LOLCAKES'
       })
+      var locationData = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+      request("/events", "get", locationData).done(function(res){
+        console.log(res);
+        debugger;
+      });
+  //BELOW IS IF THE USER CLICKS NO I DON'T WANT TO SHARE MY LOCATION/FALLBACK (tbh fuck 'em))
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
@@ -43,8 +51,11 @@ function initMap() {
   }
 }
 
-
-// google.maps.event.addDomListener(window, "load", initMap);
-
-// $(document).ready(function(){
-// })
+function request(url, method, data) {
+  return $.ajax({
+    url: url,
+    method: method,
+    dataType: "json",
+    data: data
+  })
+}
