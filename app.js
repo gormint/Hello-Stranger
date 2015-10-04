@@ -1,8 +1,30 @@
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 3000;
-var logger = require('morgan');
+var express      = require('express');
+var app          = express();
+var server       = require('http').createServer(app);
+var port         = process.env.PORT || 3000;
+var logger       = require('morgan');
 var ejsLayouts   = require("express-ejs-layouts");
+// Websocket
+var io           = require('socket.io')(server);
+
+// websocket connection
+io.on('connect', function(sockets) {
+  console.log('Someone has connected!');
+  sockets.on('chat message', function(msg){
+    console.log('message: ' + msg);
+    if(msg != "") {
+      var msg = msg;
+      io.emit('chat message', msg);    
+      line = new Chat({
+        chatLine: msg
+      })
+      line.save(function(err, chat) {
+        if (err) console.log(err);
+        console.log('Line Saved!');
+      })
+    }
+  });
+})
 
 
 // DB setup
