@@ -1,7 +1,15 @@
-body {
+h1 {
+  color: white;
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
   background-color: hotpink
 }
 
-h1 {
-  color: white;
+
+#map { 
+  height: 500px; 
 }
