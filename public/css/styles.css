@@ -1,7 +1,69 @@
-body {
+h1 {
+  color: white;
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
   background-color: hotpink
 }
 
-h1 {
-  color: white;
+ul {
+
+}
+#map { 
+  height: 500px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}
+
+.left {
+  display: inline-block;
+  background-color: pink;
+  width: 75%;
+}
+
+.right {
+  display: inline-block;
+  background-color: white;
+  background-image: url("flag.png");
+  text-align: center;
+  vertical-align: top;
+}
+
+.events-li {
+  display: block;
+  margin-bottom: 15px;
+  width: 95%;
+}
+
+#list-events-ul {
+  list-style: none;
+  width: 95%;
+  margin: 0;
+  padding: 50;
+}
+
+#list-events-ul ul {
+  list-style: none;
+  display: inline-block;
+  margin: 0;
+  padding: 5px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.address {
+  font-size: 1.2em;
+  font-style: oblique;
 }
