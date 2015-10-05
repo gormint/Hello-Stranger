@@ -13,18 +13,18 @@ module.exports = function(passport){
   });
 
   passport.use("local-signup", new LocalStrategy({
-    usernameField: "name",
+    usernameField: "email",
     passwordField: "password",
     passReqToCallback: true
-  }, function(req, name, password, callback){
+  }, function(req, email, password, callback){
     process.nextTick(function(){
-      User.findOne({"local.name": name}, function(err, user){
+      User.findOne({"local.email": email}, function(err, user){
         if (err) return callback(err);
         if (user) {
-          return callback(null, false, req.flash("SignupMessage", "This name has already been used"));
+          return callback(null, false, req.flash("SignupMessage", "This email has already been used"));
         } else {
           var newUser            = new User();
-          newUser.local.name    = name;
+          newUser.local.email    = email;
           newUser.local.password = newUser.encrypt(password);
 
           newUser.save(function(err) {
@@ -37,11 +37,11 @@ module.exports = function(passport){
   }));
 
   passport.use("local-login", new LocalStrategy({
-    usernameField : 'name',
+    usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true
-  }, function(req, name, password, callback){
-    User.findOnd({"local.name": name}, function(err, user){
+  }, function(req, email, password, callback){
+    User.findOnd({"local.email": email}, function(err, user){
       if (err) return callback(err);
       if (!user || !user.validPassword(password)) {
         return callback(null, false, req.flash('loginMessage', 'Incorrect cred.'))
