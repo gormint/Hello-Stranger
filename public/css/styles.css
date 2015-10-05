@@ -5,3 +5,10 @@ body {
 h1 {
   color: white;
 }
+
+#chat-div {
+  overflow-y: auto;
+  width: 200px;
+  height: 100px;
+  background-color: white;
+}
