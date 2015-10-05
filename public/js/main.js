@@ -67,19 +67,21 @@ function isActive(event){
 }
 
 function appendEvents(events){
-  $.each(events, function(index, eventData){
-    console.log(eventData);
-    var distance = calculateDistance(51.520143399999995, -0.0704499, eventData.venues[0].lat, eventData.venues[0].lng);
-    var eventDetails = {
-      title: eventData.title,
-      slug: eventData.slug,
-      address: eventData.venues[0].address,
-      distance: distance
-    }
-    var template = $("#list-template").html();
-    Mustache.parse(template);
-    var rendered = Mustache.render(template, eventDetails);
-    $("#list-events-ul").append(rendered);
+  navigator.geolocation.getCurrentPosition(function(position){
+    $.each(events, function(index, eventData){
+      console.log(eventData);
+      var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng);
+      var eventDetails = {
+        title: eventData.title,
+        slug: eventData.slug,
+        address: eventData.venues[0].address,
+        distance: distance.toFixed(3)
+      }
+      var template = $("#list-template").html();
+      Mustache.parse(template);
+      var rendered = Mustache.render(template, eventDetails);
+      $("#list-events-ul").append(rendered);
+    })
   })
 }
 
