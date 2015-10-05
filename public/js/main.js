@@ -73,9 +73,9 @@ function getEvents(latitude, longitude){
 }
 
 function callbackFunction(object) {
-  console.log(typeof object);
   events = object.data.filter(isActive);
   console.log(events);
+  appendEvents(events);
 }
 
 function isActive(event){
@@ -83,6 +83,21 @@ function isActive(event){
   var currentDate = new Date();
 
   return (eventStartDate.getDate() === currentDate.getDate()) && (eventStartDate.getFullYear() === currentDate.getFullYear()) && (eventStartDate.getMonth() === currentDate.getMonth());
+}
+
+function appendEvents(events){
+  $.each(events, function(index, eventData){
+    console.log(eventData);
+    var eventDetails = {
+      title: eventData.title,
+      address: eventData.venues[0].address,
+      distance: eventData.venues[0].lng
+    }
+    var template = $("#list-template").html();
+    Mustache.parse(template);
+    var rendered = Mustache.render(template, eventDetails);
+    $("#list-events-ul").append(rendered);
+  })
 }
 
 function request(url, method, data) {

@@ -11,5 +11,13 @@ html, body {
 
 
 #map { 
-  /*height: 500px; */
+  height: 500px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
 }

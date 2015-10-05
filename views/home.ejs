@@ -1,4 +1,16 @@
 
 
 
-<div id="map"></div>
+<div id="map" class="hide"></div>
+
+<div id="list-events">
+  <ul id="list-events-ul">
+    <script id="list-template" type="x-template-mustache">
+      <li class="events" data-slug="{{ slug }}">
+        <span>{{ title }}</span>
+        <span>{{ address }}</span>
+        <span>{{ distance }}</span>
+      </li>
+    </script>
+  </ul>
+</div>
