@@ -6,11 +6,19 @@
 <div id="list-events">
   <ul id="list-events-ul">
     <script id="list-template" type="x-template-mustache">
-      <li class="events" data-slug="{{ slug }}">
-        <span>{{ title }}</span>
-        <span>{{ address }}</span>
-        <span>{{ distance }}</span>
-      </li>
+      <a href="{{ slug }}">
+        <li class="events-li">
+          <div class="left">
+            <ul>
+              <li class="title">{{ title }}</li>
+              <li class="address">{{ address }}</li>
+            </ul>
+          </div>
+          <div class="right">
+            <p>{{ distance }}</p>
+          </div>
+        </li>
+      </a>
     </script>
   </ul>
 </div>

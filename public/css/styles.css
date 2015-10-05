@@ -9,7 +9,9 @@ html, body {
   background-color: hotpink
 }
 
+ul {
 
+}
 #map { 
   height: 500px;
 }
@@ -20,4 +22,48 @@ html, body {
 
 .show {
   display: inline-block;
+}
+
+.left {
+  display: inline-block;
+  background-color: pink;
+  width: 75%;
+}
+
+.right {
+  display: inline-block;
+  background-color: white;
+  background-image: url("flag.png");
+  text-align: center;
+  vertical-align: top;
+}
+
+.events-li {
+  display: block;
+  margin-bottom: 15px;
+  width: 95%;
+}
+
+#list-events-ul {
+  list-style: none;
+  width: 95%;
+  margin: 0;
+  padding: 50;
+}
+
+#list-events-ul ul {
+  list-style: none;
+  display: inline-block;
+  margin: 0;
+  padding: 5px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.address {
+  font-size: 1.2em;
+  font-style: oblique;
 }

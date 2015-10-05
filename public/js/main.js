@@ -90,6 +90,7 @@ function appendEvents(events){
     console.log(eventData);
     var eventDetails = {
       title: eventData.title,
+      slug: eventData.slug,
       address: eventData.venues[0].address,
       distance: eventData.venues[0].lng
     }
