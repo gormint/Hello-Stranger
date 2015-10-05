@@ -1,7 +1,7 @@
-var initialLocation;
-var browserSupportFlag =  new Boolean();  
 
 function initMap() {
+  var initialLocation;
+  var browserSupportFlag =  new Boolean(); 
   var myOptions = {
     zoom: 16,
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -20,14 +20,15 @@ function initMap() {
         map: map,
         title: 'LOLCAKES'
       })
-      var locationData = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }
-      request("/events", "get", locationData).done(function(res){
-        console.log(res);
-        debugger;
-      });
+      getEvents(position.coords.latitude, position.coords.longitude);
+      // var locationData = {
+      //   latitude: position.coords.latitude,
+      //   longitude: position.coords.longitude
+      // }
+      // request("/events", "get", locationData).done(function(res){
+      //   console.log(res);
+      //   debugger;
+      // });
   //BELOW IS IF THE USER CLICKS NO I DON'T WANT TO SHARE MY LOCATION/FALLBACK (tbh fuck 'em))
     }, function() {
       handleNoGeolocation(browserSupportFlag);
@@ -51,11 +52,44 @@ function initMap() {
   }
 }
 
+function getEvents(latitude, longitude){
+  console.log('getEvents')
+  //format current date time into YYYY-MM-DD
+  var date = new Date()
+  var currentDate = String(date.getUTCFullYear()).concat("-", date.getUTCMonth() + 1, "-", date.getUTCDate());
+
+  var lineupUrl = "http://planvine.com/api/v1.7/event?apiKey=d95e605e18384209b386773c5468b15e&lat="+ latitude + "&lng=" + longitude + "&radius=1&startDate=" + currentDate + "&order=date&callback=callbackFunction";
+
+
+  request(lineupUrl, "get")
+  // .done(function(response){
+  //   events = JSON.parse(response.body).data.filter(isActive);
+  //   debugger;
+  // })
+  // .always(function(response) {
+  //   console.log('always')
+  //   console.log(response)
+  // })
+}
+
+function callbackFunction(object) {
+  console.log(typeof object);
+  events = object.data.filter(isActive);
+  console.log(events);
+}
+
+function isActive(event){
+  var eventStartDate = new Date(event.venues[0].performances[0].startDate);
+  var currentDate = new Date();
+
+  return (eventStartDate.getDate() === currentDate.getDate()) && (eventStartDate.getFullYear() === currentDate.getFullYear()) && (eventStartDate.getMonth() === currentDate.getMonth());
+}
+
 function request(url, method, data) {
   return $.ajax({
     url: url,
     method: method,
-    dataType: "json",
+    dataType: "jsonp",
     data: data
   })
 }
