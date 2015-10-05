@@ -14,8 +14,9 @@ router.route('/')
 
 
 // User
-function authenticatedUser(req, res, next){
-  (req.isAuthenticated()) ? next() : res.redirect("/");
+function authenticatedUser(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/');
 }
 
 router.route('/signup')

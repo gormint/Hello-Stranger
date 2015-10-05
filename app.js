@@ -45,7 +45,7 @@ require('./config/passport')(passport);
 app.use(function(req, res, next) {
   global.user = req.user;
   next();
-})
+});
 
 
 // Routes
