@@ -21,15 +21,6 @@ function initMap() {
         title: 'LOLCAKES'
       })
       getEvents(position.coords.latitude, position.coords.longitude);
-      // var locationData = {
-      //   latitude: position.coords.latitude,
-      //   longitude: position.coords.longitude
-      // }
-      // request("/events", "get", locationData).done(function(res){
-      //   console.log(res);
-      //   debugger;
-      // });
-  //BELOW IS IF THE USER CLICKS NO I DON'T WANT TO SHARE MY LOCATION/FALLBACK (tbh fuck 'em))
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
@@ -57,19 +48,9 @@ function getEvents(latitude, longitude){
   //format current date time into YYYY-MM-DD
   var date = new Date()
   var currentDate = String(date.getUTCFullYear()).concat("-", date.getUTCMonth() + 1, "-", date.getUTCDate());
-
+  console.log("lat: " + latitude + "long: " + longitude);
   var lineupUrl = "http://planvine.com/api/v1.7/event?apiKey=d95e605e18384209b386773c5468b15e&lat="+ latitude + "&lng=" + longitude + "&radius=1&startDate=" + currentDate + "&order=date&callback=callbackFunction";
-
-
   request(lineupUrl, "get")
-  // .done(function(response){
-  //   events = JSON.parse(response.body).data.filter(isActive);
-  //   debugger;
-  // })
-  // .always(function(response) {
-  //   console.log('always')
-  //   console.log(response)
-  // })
 }
 
 function callbackFunction(object) {
@@ -88,17 +69,33 @@ function isActive(event){
 function appendEvents(events){
   $.each(events, function(index, eventData){
     console.log(eventData);
+    var distance = calculateDistance(51.520143399999995, -0.0704499, eventData.venues[0].lat, eventData.venues[0].lng);
     var eventDetails = {
       title: eventData.title,
       slug: eventData.slug,
       address: eventData.venues[0].address,
-      distance: eventData.venues[0].lng
+      distance: distance
     }
     var template = $("#list-template").html();
     Mustache.parse(template);
     var rendered = Mustache.render(template, eventDetails);
     $("#list-events-ul").append(rendered);
   })
+}
+
+function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLongitude, unit) {
+    var radUserLatitude = Math.PI * userLatitude/180;
+    var radEventLatitude = Math.PI * eventLatitude/180;
+    var radUserLongitude = Math.PI * userLongitude/180;
+    var radEventLongitude = Math.PI * eventLongitude/180;
+    var theta = userLongitude-eventLongitude;
+    var radtheta = Math.PI * theta/180;
+    var distance = Math.sin(radUserLatitude) * Math.sin(radEventLatitude) + Math.cos(radUserLatitude) * Math.cos(radEventLatitude) * Math.cos(radtheta);
+    distance = Math.acos(distance);
+    distance = distance * 180/Math.PI;
+    distance = distance * 60 * 1.1515;
+    if (unit=="K") { distance = distance * 1.609344 };
+    return distance;
 }
 
 function request(url, method, data) {
