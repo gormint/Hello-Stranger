@@ -73,7 +73,7 @@ function appendEvents(events){
       var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng);
       var eventDetails = {
         title: eventData.title,
-        slug: eventData.slug,
+        eventid: eventData.id,
         address: eventData.venues[0].address,
         distance: distance.toFixed(3)
       }
@@ -99,6 +99,27 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     if (unit=="K") { distance = distance * 1.609344 };
     return distance;
 }
+
+
+$('body').on('click', ".events-li", function(event){
+  console.log("Click in li list")
+  console.log($(this));
+  console.log("Click in li list")
+  var eventid = $(this).data("eventid");
+  console.log(eventid);
+
+
+  urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
+
+  request(urlSingleEvent, "get")
+  .done(function(response){
+    console.log(response);
+  })
+  .fail(function(error){
+    console.log("got and error: " + error);
+  })
+})
+
 
 function request(url, method, data) {
   return $.ajax({
