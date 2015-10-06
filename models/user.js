@@ -1,15 +1,21 @@
 var mongoose = require("mongoose");
+var bcrypt   = require('bcrypt-nodejs');
 
 var userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
+  local: {
+    email: {type: String, require: true, unique: true},
+    password: {type: String, require: true}
+  },
   events: [{type: mongoose.Schema.ObjectId, ref: "Event"}]
 });
 
-userSchema.methods.getLocation = function(){
-  
-}
+userSchema.methods.encrypt = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password);
+};
 
 var User = mongoose.model("User", userSchema);
 
