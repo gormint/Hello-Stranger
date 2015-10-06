@@ -4,51 +4,6 @@ $(document).ready(function(){
   })
 })
 
-
-// function initMap() {
-//   var initialLocation;
-//   var browserSupportFlag =  new Boolean(); 
-//   var myOptions = {
-//     zoom: 16,
-//     mapTypeId: google.maps.MapTypeId.ROADMAP
-//   };
-//   var map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-
-//   // Try W3C Geolocation (Preferred)
-//   if(navigator.geolocation) {
-//     browserSupportFlag = true;
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-//       map.setCenter(initialLocation);
-//       var marker = new google.maps.Marker({
-//         position: initialLocation,
-//         map: map,
-//         title: 'You'
-//       })
-//       getEvents(position.coords.latitude, position.coords.longitude);
-//     }, function() {
-//       handleNoGeolocation(browserSupportFlag);
-//     });
-//   }
-//   // Browser doesn't support Geolocation
-//   else {
-//     browserSupportFlag = false;
-//     handleNoGeolocation(browserSupportFlag);
-//   }
-
-//   function handleNoGeolocation(errorFlag) {
-//     if (errorFlag == true) {
-//       alert("Geolocation service failed.");
-//       initialLocation = newyork;
-//     } else {
-//       alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
-//       initialLocation = siberia;
-//     }
-//     map.setCenter(initialLocation);
-//   }
-// }
-
 function getEvents(latitude, longitude){
   console.log('getEvents')
   //format current date time into YYYY-MM-DD
@@ -129,27 +84,64 @@ $('body').on('click', ".events-li", function(event){
 
 function appendEvent(response) {
   var apiDesc = response.data.description;
+  var eventLat = response.data.venues[0].lat;
+  var eventLng = response.data.venues[0].lng;
   $('#list-events-ul').html('') // clears list data
   $('#single-event').append(apiDesc);
   var apiClean = $('#single-event:first').text();
   $('#single-event').html(apiClean);
   $('#map').removeClass('hide');
-  var eventLat = response.data.venues[0].lat;
-  var eventLng = response.data.venues[0].lng;
+  console.log('event position lat:' + eventLat)
+  console.log('event position lng:' + eventLng)
+  initMap(eventLat, eventLng);
+}
 
-  // eventLocation = new google.maps.LatLng(eventLat, eventLng);
-  // var EventMarker = new google.maps.Marker({
-  //       position: eventLocation,
-  //       map: map,
-  //       title: 'Event'
-  //     })
-  var EventMarker = new google.maps.Marker({
-    position : new google.maps.LatLng(eventLat, eventLng),
-    map : map
-  }); 
 
-  debugger;
+function initMap(eventLat, eventLng) {
+  var browserSupportFlag = new Boolean(); 
+  var myOptions = {
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map"), myOptions);
 
+  // Try W3C Geolocation (Preferred)
+  if(navigator.geolocation) {
+    browserSupportFlag = true;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      userLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      map.setCenter(userLocation);
+      var marker = new google.maps.Marker({
+        position: userLocation,
+        map: map,
+        title: 'You'
+      })
+      var eventLocation = new google.maps.LatLng(eventLat, eventLng);
+      var eventMarker = new google.maps.Marker({
+        position: eventLocation,
+        map: map,
+        title: 'Event'
+      })
+    }, function() {
+      handleNoGeolocation(browserSupportFlag);
+    });
+  }
+  // Browser doesn't support Geolocation
+  else {
+    browserSupportFlag = false;
+    handleNoGeolocation(browserSupportFlag);
+  }
+
+  function handleNoGeolocation(errorFlag) {
+    if (errorFlag == true) {
+      alert("Geolocation service failed.");
+      userLocation = newyork;
+    } else {
+      alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
+      userLocation = siberia;
+    }
+    map.setCenter(userLocation);
+  }
 }
 
 function request(url, method, data) {
