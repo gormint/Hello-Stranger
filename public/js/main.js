@@ -103,6 +103,8 @@ function initMap(eventLat, eventLng) {
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
   var map = new google.maps.Map(document.getElementById("map"), myOptions);
 
   // Try W3C Geolocation (Preferred)
@@ -110,18 +112,29 @@ function initMap(eventLat, eventLng) {
     browserSupportFlag = true;
     navigator.geolocation.getCurrentPosition(function(position) {
       userLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      map.setCenter(userLocation);
-      var marker = new google.maps.Marker({
-        position: userLocation,
-        map: map,
-        title: 'You'
-      })
+      directionsDisplay.setMap(map);
+      // var marker = new google.maps.Marker({
+      //   position: userLocation,
+      //   map: map,
+      //   title: 'You'
+      // })
       var eventLocation = new google.maps.LatLng(eventLat, eventLng);
-      var eventMarker = new google.maps.Marker({
-        position: eventLocation,
-        map: map,
-        title: 'Event'
-      })
+      // var eventMarker = new google.maps.Marker({
+      //   position: eventLocation,
+      //   map: map,
+      //   title: 'Event'
+      // })
+      directionsService.route({
+        origin: userLocation,
+        destination: eventLocation,
+        travelMode: google.maps.TravelMode.WALKING
+      }, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
