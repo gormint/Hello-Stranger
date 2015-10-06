@@ -1,0 +1,24 @@
+
+
+
+<div id="map" class="hide"></div>
+
+<div id="list-events">
+  <ul id="list-events-ul">
+    <script id="list-template" type="x-template-mustache">
+      <a href="{{ slug }}">
+        <li class="events-li">
+          <div class="left">
+            <ul>
+              <li class="title">{{ title }}</li>
+              <li class="address">{{ address }}</li>
+            </ul>
+          </div>
+          <div class="right">
+            <p>{{ distance }} miles</p>
+          </div>
+        </li>
+      </a>
+    </script>
+  </ul>
+</div>
