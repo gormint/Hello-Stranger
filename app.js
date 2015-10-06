@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var port = process.env.PORT || 3000;
-var Event = require("./models/event");
+var Event = require("./models/event").Event;
 
 var passport = require('passport');
 var logger = require('morgan');
@@ -56,7 +56,8 @@ var routes = require('./config/routes');
 app.use(routes);
 
 // Websocket
-var io = require('socket.io')(server);
+// var io = require('socket.io')(server);
+var io = require("./models/event").io(server);
 
 Event.findById("5613d1dd2aed8ed295790bb0", function(err, event){
   if (err) console.log(err);

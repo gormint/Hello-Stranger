@@ -4,11 +4,17 @@ var User = require("../models/user");
 function create(req, res){
   console.log(req.session);
   var user = User.findById(req.session.passport.id);
+  penName = user.getPenName();
   Event.findOne({lineUpId: req.body.lineUpId}, function(err, event){
     if (err) console.log(err);
     if (event) {
-      event.getChatRoom()
+      event.getChatRoom(io, user, penName)
+    } else {
+      newEvent = new Event({
+        name: req.body.name
+      })
     }
+
   })
 
 }

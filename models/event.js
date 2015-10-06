@@ -38,4 +38,5 @@ eventSchema.methods.getChatRoom = function(io){
 
 var Event = mongoose.model("Event", eventSchema);
 
-module.exports = Event;
+module.exports.io = io;
+module.exports.Event = Event;
