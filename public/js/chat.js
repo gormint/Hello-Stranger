@@ -1,4 +1,4 @@
-$(document).ready (function () {
+$(document).ready(function() {
   console.log("Document chat.js ready!")
 
   var actualUser = "John";
@@ -42,26 +42,4 @@ $(document).ready (function () {
     console.log('click');
     $('#chat-div').animate({scrollTop: $elem.height()}, 800);
   });
-
-
-
-
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

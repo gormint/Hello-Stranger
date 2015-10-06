@@ -71,7 +71,6 @@ $("#join-chat").on("submit", function(e){                     //
     data: data
   })
   .done(function(response){
-    debugger;
     console.log(response);
   });
 });                                                           //

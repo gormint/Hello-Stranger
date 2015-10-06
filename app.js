@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var port = process.env.PORT || 3000;
-var Event = require("./models/event").Event;
+
+// Websocket
+var io = require('socket.io')(server);
 
 var passport = require('passport');
 var logger = require('morgan');
@@ -25,7 +27,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false} ))
 app.use(bodyParser.json())
-
 
 // views setup/engine etc.
 app.use(ejsLayouts);
@@ -52,17 +53,15 @@ app.use(function(req, res, next) {
 });
 
 // Routes
-var routes = require('./config/routes');
+var routes = require('./config/routes')(io);
 app.use(routes);
 
-// Websocket
-// var io = require('socket.io')(server);
-var io = require("./models/event").io(server);
+// var io = require("./models/event").io(server);
 
-Event.findById("5613d1dd2aed8ed295790bb0", function(err, event){
-  if (err) console.log(err);
-  event.getChatRoom(io);
-})
+// Event.findById("5613d1dd2aed8ed295790bb0", function(err, event){
+//   if (err) console.log(err);
+//   event.getChatRoom(io);
+// })
 
 
 server.listen(port, function() {
