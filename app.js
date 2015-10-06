@@ -1,15 +1,16 @@
 var express = require('express');
 var app = express();
-var server       = require('http').createServer(app);
+var server = require('http').createServer(app);
 var port = process.env.PORT || 3000;
+var Event = require("./models/event");
 
-var passport     = require('passport');
+var passport = require('passport');
 var logger = require('morgan');
 
 var ejsLayouts = require("express-ejs-layouts");
 var bodyParser = require('body-parser');
 
-var flash        = require('connect-flash');
+var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
@@ -50,7 +51,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 // Routes
 var routes = require('./config/routes');
 app.use(routes);
@@ -58,26 +58,9 @@ app.use(routes);
 // Websocket
 var io = require('socket.io')(server);
 
-// websocket connection
-io.on('connect', function(socket) {
-  console.log('Someone has connected!');
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-    // If there is a message from input form
-    if(msg != "") {
-      var msg = msg;
-      io.emit('chat message', msg);
-      console.log("message emited = msg");   
-      //line = new Chat({
-      //  chatLine: msg
-      //})
-      //// Save a line-message to DB
-      //line.save(function(err, chat) {
-      //  if (err) console.log(err);
-      //  console.log('Line Saved!');
-      //})
-    }
-  });
+Event.findById("5613d1dd2aed8ed295790bb0", function(err, event){
+  if (err) console.log(err);
+  event.getChatRoom(io);
 })
 
 
