@@ -1,47 +1,53 @@
-
-function initMap() {
-  var initialLocation;
-  var browserSupportFlag =  new Boolean(); 
-  var myOptions = {
-    zoom: 16,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("map"), myOptions);
+$(document).ready(function(){
+  navigator.geolocation.getCurrentPosition(function(position) {
+    getEvents(position.coords.latitude, position.coords.longitude)
+  })
+})
 
 
-  // Try W3C Geolocation (Preferred)
-  if(navigator.geolocation) {
-    browserSupportFlag = true;
-    navigator.geolocation.getCurrentPosition(function(position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      map.setCenter(initialLocation);
-      var marker = new google.maps.Marker({
-        position: initialLocation,
-        map: map,
-        title: 'LOLCAKES'
-      })
-      getEvents(position.coords.latitude, position.coords.longitude);
-    }, function() {
-      handleNoGeolocation(browserSupportFlag);
-    });
-  }
-  // Browser doesn't support Geolocation
-  else {
-    browserSupportFlag = false;
-    handleNoGeolocation(browserSupportFlag);
-  }
+// function initMap() {
+//   var initialLocation;
+//   var browserSupportFlag =  new Boolean(); 
+//   var myOptions = {
+//     zoom: 16,
+//     mapTypeId: google.maps.MapTypeId.ROADMAP
+//   };
+//   var map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-  function handleNoGeolocation(errorFlag) {
-    if (errorFlag == true) {
-      alert("Geolocation service failed.");
-      initialLocation = newyork;
-    } else {
-      alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
-      initialLocation = siberia;
-    }
-    map.setCenter(initialLocation);
-  }
-}
+
+//   // Try W3C Geolocation (Preferred)
+//   if(navigator.geolocation) {
+//     browserSupportFlag = true;
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+//       map.setCenter(initialLocation);
+//       var marker = new google.maps.Marker({
+//         position: initialLocation,
+//         map: map,
+//         title: 'You'
+//       })
+//       getEvents(position.coords.latitude, position.coords.longitude);
+//     }, function() {
+//       handleNoGeolocation(browserSupportFlag);
+//     });
+//   }
+//   // Browser doesn't support Geolocation
+//   else {
+//     browserSupportFlag = false;
+//     handleNoGeolocation(browserSupportFlag);
+//   }
+
+//   function handleNoGeolocation(errorFlag) {
+//     if (errorFlag == true) {
+//       alert("Geolocation service failed.");
+//       initialLocation = newyork;
+//     } else {
+//       alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
+//       initialLocation = siberia;
+//     }
+//     map.setCenter(initialLocation);
+//   }
+// }
 
 function getEvents(latitude, longitude){
   console.log('getEvents')
@@ -123,11 +129,27 @@ $('body').on('click', ".events-li", function(event){
 
 function appendEvent(response) {
   var apiDesc = response.data.description;
-  console.log("LOL Description: " + apiDesc)
   $('#list-events-ul').html('') // clears list data
   $('#single-event').append(apiDesc);
-  var apiClean = $('#single-event:first').text()
-  $('#single-event').html(apiClean)
+  var apiClean = $('#single-event:first').text();
+  $('#single-event').html(apiClean);
+  $('#map').removeClass('hide');
+  var eventLat = response.data.venues[0].lat;
+  var eventLng = response.data.venues[0].lng;
+
+  // eventLocation = new google.maps.LatLng(eventLat, eventLng);
+  // var EventMarker = new google.maps.Marker({
+  //       position: eventLocation,
+  //       map: map,
+  //       title: 'Event'
+  //     })
+  var EventMarker = new google.maps.Marker({
+    position : new google.maps.LatLng(eventLat, eventLng),
+    map : map
+  }); 
+
+  debugger;
+
 }
 
 function request(url, method, data) {
