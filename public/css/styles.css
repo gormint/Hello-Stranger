@@ -33,7 +33,6 @@ ul {
 .right {
   display: inline-block;
   background-color: white;
-  background-image: url("flag.png");
   text-align: center;
   vertical-align: top;
 }

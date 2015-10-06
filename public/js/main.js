@@ -5,18 +5,16 @@ $(document).ready(function(){
 })
 
 function getEvents(latitude, longitude){
-  console.log('getEvents')
   //format current date time into YYYY-MM-DD
   var date = new Date()
   var currentDate = String(date.getUTCFullYear()).concat("-", date.getUTCMonth() + 1, "-", date.getUTCDate());
-  console.log("lat: " + latitude + "long: " + longitude);
+  // console.log("lat: " + latitude + "long: " + longitude);
   var lineupUrl = "http://planvine.com/api/v1.7/event?apiKey=d95e605e18384209b386773c5468b15e&lat="+ latitude + "&lng=" + longitude + "&radius=1&startDate=" + currentDate + "&order=date&callback=callbackFunction";
   request(lineupUrl, "get")
 }
-
 function callbackFunction(object) {
   events = object.data.filter(isActive);
-  console.log(events);
+  // console.log(events);
   appendEvents(events);
 }
 
@@ -30,7 +28,7 @@ function isActive(event){
 function appendEvents(events){
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
-      console.log(eventData);
+      // console.log(eventData);
       var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng);
       var eventDetails = {
         title: eventData.title,
