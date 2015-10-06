@@ -81,13 +81,43 @@ $('body').on('click', ".events-li", function(event){
 })
 
 function appendEvent(response) {
+  var apiTitle = response.data.title;
   var apiDesc = response.data.description;
   var eventLat = response.data.venues[0].lat;
   var eventLng = response.data.venues[0].lng;
   $('#list-events-ul').html('') // clears list data
-  $('#single-event').append(apiDesc);
-  var apiClean = $('#single-event:first').text();
-  $('#single-event').html(apiClean);
+  //$('#single-event').append(apiDesc);  
+  //apiClean = $('#single-event:first').text();
+  
+  
+      //apiClean = $('#single-event:first');
+      //console.log("api Clean = " + apiClean);
+      console.log("title = " + apiTitle);
+      console.log("description = " + apiDesc);
+      var apiDesc = apiDesc.replace(/<br>|<p>|<\/p>/ig,"±±±");
+      var apiDesc = apiDesc.replace(/(<([^>]+)>)/ig,"");
+      var retur = String.fromCharCode(13);
+      //retur = String.fromCharCode(65,66,67);
+      console.log("Retur = " + retur);
+      var apiDesc = apiDesc.replace("±±±", retur);
+
+      //pat1 = /\.\n/ig;
+      //var Str = Str.replace(/\./ig, "<br>");
+      //$('#single-event').html(Str);
+      //$('#single-event').html(apiClean);
+
+      var eventDetails = {
+        title: apiTitle,
+        description: apiDesc
+      }
+
+      var singleTemplate = $("#single-template").html();
+      Mustache.parse(singleTemplate);
+      var rend = Mustache.render(singleTemplate, eventDetails);
+      $("#list-event").append(rend);
+  
+
+  //$('#single-event').html(apiClean);
   $('#map').removeClass('hide');
   console.log('event position lat:' + eventLat)
   console.log('event position lng:' + eventLng)

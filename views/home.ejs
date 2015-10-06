@@ -20,13 +20,17 @@
   </ul>
 </div>
 <div id="single-event">
-  <script id="single-template" type="x-template-mustache">
-  <div class="event-info" data-eventid="{{ eventid }}">
-
-    <div id="api-description">
-  
-    </div>
-  </div>
-</script>
+  <ul id="list-event">
+    <script id="single-template" type="x-template-mustache">
+      <div class="event-info" data-eventid="{{ eventid }}">
+        <div id="api-description">
+          <ul>
+            <li class="title">{{ title }}</li>
+            <li class="description">{{ description }}</li>
+          </ul>
+        </div>
+      </div>
+    </script>
+  </ul>
 </div>
 

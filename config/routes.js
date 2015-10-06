@@ -33,7 +33,8 @@ router.route("/logout")
 
 // after login user will come here
 router.route("/home")
-  .get(authenticatedUser, staticController.home);
+.get(staticController.home);
+  //.get(authenticatedUser, staticController.home);
 
 // Event
 // router.route('/events')
