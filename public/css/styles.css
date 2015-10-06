@@ -6,7 +6,7 @@ html, body {
   height: 100%; 
   margin: 0; 
   padding: 0; 
-  background-color: hotpink
+  background-color: hotpink;
 }
 
 h1 {
@@ -44,7 +44,6 @@ ul {
 .right {
   display: inline-block;
   background-color: white;
-  background-image: url("flag.png");
   text-align: center;
   vertical-align: top;
 }
