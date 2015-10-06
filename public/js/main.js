@@ -113,13 +113,22 @@ $('body').on('click', ".events-li", function(event){
 
   request(urlSingleEvent, "get")
   .done(function(response){
-    console.log(response);
+    console.log("from the api:" + response);
+    appendEvent(response);
   })
   .fail(function(error){
     console.log("got and error: " + error);
   })
 })
 
+function appendEvent(response) {
+  var apiDesc = response.data.description;
+  console.log("LOL Description: " + apiDesc)
+  $('#list-events-ul').html('') // clears list data
+  $('#single-event').append(apiDesc);
+  var apiClean = $('#single-event:first').text()
+  $('#single-event').html(apiClean)
+}
 
 function request(url, method, data) {
   return $.ajax({
