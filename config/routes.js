@@ -36,8 +36,8 @@ router.route("/home")
   .get(authenticatedUser, staticController.home);
 
 // Event
-// router.route('/events')
-//   .get(eventsController.index);
+router.route('/events')
+  .post(eventsController.create);
 
 
 

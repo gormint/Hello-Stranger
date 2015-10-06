@@ -1,7 +1,7 @@
 $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(function(position) {
-    getEvents(position.coords.latitude, position.coords.longitude)
-  })
+    getEvents(position.coords.latitude, position.coords.longitude);
+  });
 })
 
 function getEvents(latitude, longitude){
@@ -59,6 +59,23 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     return distance;
 }
 
+//temp function for testing/////////////////////////////////////
+$("#join-chat").on("submit", function(e){                     //
+  e.preventDefault;                                           //
+  data = $(this).serialize();
+  console.log("join chat is clicked");
+  $.ajax({
+    url: "/events",
+    method: "post",
+    dataType: "json",
+    data: data
+  })
+  .done(function(response){
+    debugger;
+    console.log(response);
+  });
+});                                                           //
+//temp function for testing/////////////////////////////////////
 
 $('body').on('click', ".events-li", function(event){
   console.log("Click in li list")
@@ -66,7 +83,6 @@ $('body').on('click', ".events-li", function(event){
   console.log("Click in li list")
   var eventid = $(this).data("eventid");
   console.log(eventid);
-
 
   urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
 

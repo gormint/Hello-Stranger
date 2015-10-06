@@ -11,7 +11,8 @@ var eventSchema = new mongoose.Schema({
   },
   startDateTime: Date,
   endDateTime: Date,
-  description: String
+  description: String,
+  lineUpId: String
 });
 
 eventSchema.methods.getChatRoom = function(io){
