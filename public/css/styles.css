@@ -6,7 +6,40 @@ html, body {
   height: 100%; 
   margin: 0; 
   padding: 0; 
-  background-color: hotpink;
+  background-image: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%)
+}
+
+nav {
+  height: 34px;
+}
+.landerform {
+  margin-top: 15%;
+  text-align: center;
+}
+.pure-u-1-2 {
+  margin-bottom: 2%;
+}
+.pure-button-primary {
+  background: white;
+  color: #6CCCE5;
+  border: 0 rgba(0,0,0,0);
+  border-radius: 5px;
+  font-size: 120%;
+  text-decoration: none;
+}
+a.pure-button-primary {
+  background: white;
+  color: #6CCCE5;
+  border: 0 rgba(0,0,0,0);
+  border-radius: 5px;
+  font-size: 120%;
+  text-decoration: none;
+  width: 50%;
+  margin-top: 2%;
+}
+
+::-webkit-input-placeholder {
+ text-align: center;
 }
 
 #map { 
@@ -16,7 +49,6 @@ html, body {
 .hide {
   display: none;
 }
-
 .show {
   display: inline-block;
 }

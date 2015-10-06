@@ -10,7 +10,8 @@ var eventsController = require('../controllers/events');
 
 // Static
 router.route('/')
-  .get(staticController.lander);
+  // .get(staticController.lander);
+  .get(usersController.getLogin);
 
 
 // User
