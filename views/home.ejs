@@ -1,13 +1,10 @@
-
-
-
 <div id="map" class="hide"></div>
 
 <div id="list-events">
   <ul id="list-events-ul">
     <script id="list-template" type="x-template-mustache">
-      <a href="{{ slug }}">
-        <li class="events-li">
+      <li class="events-li" data-eventid="{{ eventid }}">
+        <a href="#">
           <div class="left">
             <ul>
               <li class="title">{{ title }}</li>
@@ -17,8 +14,19 @@
           <div class="right">
             <p>{{ distance }} miles</p>
           </div>
-        </li>
-      </a>
+        </a>
+      </li>
     </script>
   </ul>
 </div>
+<div id="single-event">
+  <script id="single-template" type="x-template-mustache">
+  <div class="event-info" data-eventid="{{ eventid }}">
+
+    <div id="api-description">
+  
+    </div>
+  </div>
+</script>
+</div>
+
