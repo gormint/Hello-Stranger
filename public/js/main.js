@@ -72,21 +72,21 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     return distance;
 }
 
-//temp function for testing/////////////////////////////////////
-$("#join-chat").on("submit", function(e){                     //
-  e.preventDefault;                                           //
-  data = $(this).serialize();
-  console.log("join chat is clicked");
-  $.ajax({
-    url: "/events",
-    method: "post",
-    dataType: "json",
-    data: data
-  })
-  .done(function(response){
-    console.log(response);
-  });
-});                                                           //
+
+// $("#js-join-chat-form").on("submit", function(e){                     //
+//   e.preventDefault;                                           //
+//   data = $(this).serialize();
+//   console.log("join chat is clicked");
+//   $.ajax({
+//     url: "/events",
+//     method: "post",
+//     dataType: "json",
+//     data: data
+//   })
+//   .done(function(response){
+//     console.log(response);
+//   });
+// });                                                           //
 //temp function for testing/////////////////////////////////////
 
 $('body').on('click', ".events-li", function(event){

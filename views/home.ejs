@@ -26,9 +26,9 @@
         <div id="api-description">
           <ul>
             <li>
-              <div  class="join-chat">
+              <div class="join-chat">
                  <li class="title">{{ title }}</li>
-                 <form id="js-join-chat-form">
+                 <form id="js-join-chat-form" action="/events" method="post">
                   <input type="hidden" name="title" value="{{ title }}">
                   <input type="hidden" name="venueName" value="venueName">
                   <input type="hidden" name="venueLatitude" value="venueLatitude">
