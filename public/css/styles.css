@@ -1,17 +1,21 @@
 h1 {
   color: white;
 }
-
+/* PAGE BACKGROUND ETC. ===================*/
 html, body { 
   height: 100%; 
   margin: 0; 
   padding: 0; 
-  background-image: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%)
+  background-image: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-
+/* NAVIGATION BAR ===================*/
 nav {
   height: 34px;
 }
+/* LANDER & SIGNUP ===================*/
+/* Some of these are over-rides, which may bite us later */
 .landerform {
   margin-top: 15%;
   text-align: center;
@@ -37,53 +41,37 @@ a.pure-button-primary {
   width: 50%;
   margin-top: 2%;
 }
-
 ::-webkit-input-placeholder {
  text-align: center;
 }
-
+/* MAP (Map Styling is in main.js) ===================*/
 #map { 
   height: 500px;
 }
-
 .hide {
   display: none;
 }
 .show {
   display: inline-block;
 }
-
-.left {
-  display: inline-block;
-  background-color: pink;
-  width: 75%;
+/* LISTING EVENTS. ===================*/
+.js-events-li {
+  margin: 1% auto;
+}
+.list-info {
 }
 
-.right {
-  display: inline-block;
+.list-distance {
   background-color: white;
   text-align: center;
   vertical-align: top;
 }
 
-.events-li {
-  display: block;
-  margin-bottom: 15px;
-  width: 95%;
-}
-
-#list-events-ul {
-  list-style: none;
-  width: 95%;
-  margin: 0;
-  padding: 50;
-}
-
 #list-events-ul ul {
   list-style: none;
   display: inline-block;
-  margin: 0;
-  padding: 5px;
+/*  margin: 0;
+  padding: 5px;*/
 }
 
 .title {

@@ -34,7 +34,8 @@ router.route("/logout")
 
 // after login user will come here
 router.route("/home")
-  .get(authenticatedUser, staticController.home);
+  // .get(authenticatedUser, staticController.home); disabled auth for testing
+  .get(staticController.home);
 
 // Event
 // router.route('/events')

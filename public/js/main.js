@@ -4,10 +4,8 @@ $(document).ready(function(){
   })
   var path = window.location.pathname; // returns path.
   if(path.length > 2 && path != "/signup") {
-  //   $('#nav').hide();
-  // } else {
     $('#nav').slideDown("slow");
-  }
+  } // The above function shows the navbar unless you're on one of the lander pages.
 });
 
 function getEvents(latitude, longitude){
@@ -35,12 +33,12 @@ function appendEvents(events){
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
       // console.log(eventData);
-      var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng);
+      var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng, 'M');
       var eventDetails = {
         title: eventData.title,
         eventid: eventData.id,
         address: eventData.venues[0].address,
-        distance: distance.toFixed(3)
+        distance: Math.round(distance)
       }
       var template = $("#list-template").html();
       Mustache.parse(template);
@@ -62,11 +60,12 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     distance = distance * 180/Math.PI;
     distance = distance * 60 * 1.1515;
     if (unit=="K") { distance = distance * 1.609344 };
+    if (unit=="M") { distance = distance * 1609.344 };
     return distance;
 }
 
 
-$('body').on('click', ".events-li", function(event){
+$('body').on('click', ".js-events-li", function(event){
   console.log("Click in li list")
   console.log($(this));
   console.log("Click in li list")

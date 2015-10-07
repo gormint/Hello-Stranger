@@ -1,23 +1,19 @@
 <div id="map" class="hide"></div>
 
-<div id="list-events">
-  <ul id="list-events-ul">
+<div class="pure-u-11-12" id="list-events-ul">
     <script id="list-template" type="x-template-mustache">
-      <li class="events-li" data-eventid="{{ eventid }}">
-        <a href="#">
-          <div class="left">
+      <div class="js-events-li pure-g" data-eventid="{{ eventid }}">
+          <div class="pure-u-3-4 list-info">
             <ul>
               <li class="title">{{ title }}</li>
               <li class="address">{{ address }}</li>
             </ul>
           </div>
-          <div class="right">
-            <p>{{ distance }} miles</p>
+          <div class="pure-u-1-4 list-distance">
+            <p>{{ distance }} <br>meters</p>
           </div>
-        </a>
-      </li>
+      </div>
     </script>
-  </ul>
 </div>
 <div id="single-event">
   <script id="single-template" type="x-template-mustache">
