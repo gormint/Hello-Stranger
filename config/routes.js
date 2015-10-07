@@ -32,7 +32,6 @@ module.exports = function(io){
   router.route("/logout")
     .get(usersController.getLogout)
 
-
   // after login user will come here
   router.route("/home")
     .get(authenticatedUser, staticController.home);

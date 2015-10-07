@@ -96,13 +96,31 @@ $('body').on('click', ".events-li", function(event){
 })
 
 function appendEvent(response) {
+  var apiTitle = response.data.title;
   var apiDesc = response.data.description;
   var eventLat = response.data.venues[0].lat;
   var eventLng = response.data.venues[0].lng;
   $('#list-events-ul').html('') // clears list data
-  $('#single-event').append(apiDesc);
-  var apiClean = $('#single-event:first').text();
-  $('#single-event').html(apiClean);
+  //$('#single-event').append(apiDesc);  
+  //apiClean = $('#single-event:first').text();
+  
+      console.log("title = " + apiTitle);
+      console.log("description = " + apiDesc);
+      var apiDesc = apiDesc.replace(/(<([^>]+)>)/ig,"");
+
+
+      var eventDetails = {
+        title: apiTitle,
+        description: apiDesc
+      }
+
+      var singleTemplate = $("#single-template").html();
+      Mustache.parse(singleTemplate);
+      var rend = Mustache.render(singleTemplate, eventDetails);
+      $("#list-event").append(rend);
+  
+
+  //$('#single-event').html(apiClean);
   $('#map').removeClass('hide');
   console.log('event position lat:' + eventLat)
   console.log('event position lng:' + eventLng)

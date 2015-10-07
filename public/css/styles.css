@@ -20,12 +20,11 @@ h1 {
   background-color: white;
 }
 
-ul {
-
-}
 #map { 
   height: 500px;
 }
+
+
 
 .hide {
   display: none;
@@ -61,6 +60,13 @@ ul {
   padding: 50;
 }
 
+#list-event ul {
+  list-style: none;
+  width: 95%;
+  margin: 0;
+  padding: 0;
+}
+
 #list-events-ul ul {
   list-style: none;
   display: inline-block;
@@ -76,4 +82,9 @@ ul {
 .address {
   font-size: 1.2em;
   font-style: oblique;
+}
+
+.join-chat {
+  display: inline-block;
+  list-style: none;
 }
