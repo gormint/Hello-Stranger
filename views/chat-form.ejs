@@ -1,8 +1,24 @@
-<form id="message-input-form-id" action="">
-  <input id="message-input" autocomplete="off" />
-  <button>Send</button>
-</form>
-
-<button id="message-nav-up">UP</button>
-<button id="message-nav-down">DOWN</button>
-<button id="message-clean-chat">CLEAN</button>
+<!-- CHAT WINDOW -->
+<div class="pure-g">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-10-12">
+      <div id="chat-div" class="chat-box radius border inner-shadow">
+        <ul id="chat-div-ul">
+          chat window here
+        </ul>
+      </div>
+    </div>
+    <div class="pure-u-1-12"></div>
+</div>
+<div class="pure-g">
+    <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
+    <div class="pure-u-10-12 pure-u-md-10-12 pure-u-lg-8-12 inline">
+      <!-- FORM FOR MESSAGES -->
+      <form action="">
+        <input  class="chat-form" id="message-from-form" autocomplete="off" />
+        <button class="pure-button pure-input-1-2 pure-button-primary button-width">Send</button>
+      </form>
+    </div>
+    <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
+</div>
+<!-- <script src="/js/chat.js"></script> -->
