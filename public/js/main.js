@@ -14,15 +14,19 @@ $(document).ready(function(){
 
 function getEvents(latitude, longitude){
   //format current date time into YYYY-MM-DD
-  var date = new Date()
+  console.log("we are getting events");
+  var date = new Date();
   var currentDate = String(date.getUTCFullYear()).concat("-", date.getUTCMonth() + 1, "-", date.getUTCDate());
   // console.log("lat: " + latitude + "long: " + longitude);
   var lineupUrl = "http://planvine.com/api/v1.7/event?apiKey=d95e605e18384209b386773c5468b15e&lat="+ latitude + "&lng=" + longitude + "&radius=1&startDate=" + currentDate + "&order=date&callback=callbackFunction";
-  request(lineupUrl, "get")
+  console.log(lineupUrl);
+  request(lineupUrl, "get");
 }
+
 function callbackFunction(object) {
+  console.log("being called back");
   events = object.data.filter(isActive);
-  // console.log(events);
+  console.log(events);
   appendEvents(events);
 }
 
@@ -46,6 +50,7 @@ function appendEvents(events){
       }
       var template = $("#list-template").html();
       Mustache.parse(template);
+      console.log("we are using mustache");
       var rendered = Mustache.render(template, eventDetails);
       $("#list-events-ul").append(rendered);
     })
@@ -104,22 +109,21 @@ $('body').on('click', ".events-li", function(event){
 })
 
 function appendEvent(response) {
-  var apiTitle = response.data.title;
-  var apiDesc = response.data.description;
-  var eventLat = response.data.venues[0].lat;
-  var eventLng = response.data.venues[0].lng;
+  var eventData = response.data;
+  var eventLat = eventData.venues[0].lat;
+  var eventLng = eventData.venues[0].lng;
   $('#list-events-ul').html('') // clears list data
   //$('#single-event').append(apiDesc);  
   //apiClean = $('#single-event:first').text();
-  
-      console.log("title = " + apiTitle);
-      console.log("description = " + apiDesc);
-      var apiDesc = apiDesc.replace(/(<([^>]+)>)/ig,"");
-
 
       var eventDetails = {
-        title: apiTitle,
-        description: apiDesc
+        title: eventData.title,
+        description: eventData.description.replace(/(<([^>]+)>)/ig,""),
+        venueName: response.data,
+        venueLatitude: eventLat,
+        venueLongitude: eventLng,
+        startDate: eventData.venues[0].performances[0].startDate,
+        lineupId: eventData.id
       }
 
       var singleTemplate = $("#single-template").html();

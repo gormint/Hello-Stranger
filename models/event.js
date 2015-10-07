@@ -3,14 +3,13 @@
   var Message = require("./message");
 
   var eventSchema = new mongoose.Schema({
-    name: String,
+    title: String,
     venue: {
       name: String,
       Latitude: Number,
       Longitude: Number
     },
-    startDateTime: Date,
-    endDateTime: Date,
+    startDate: Date,
     description: String,
     lineUpId: String
   });
