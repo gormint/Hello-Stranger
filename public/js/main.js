@@ -87,7 +87,9 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
 //   });
 // });                                                           //
 
-$('body').on( isMobile ? 'touchend':'click', ".js-events-li", function(event){
+// isMobile ? 'touchend':'click'
+
+$('body').on( "click", ".js-events-li", function(event){
   var eventid = $(this).data("eventid");
 
   urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
