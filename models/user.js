@@ -21,7 +21,21 @@ userSchema.methods.joinEvent = function(event){
   var currentUser = this;
   console.log("event id is: " + event.id);
   console.log("currentUser is: " + currentUser.id);
-  User.find({ _id: currentUser.id, events : { $in: event }}, function(err, user){
+  var events = this.events;
+  var hasEvent = false
+  for (i=0; i< events.length; i++) {
+    console.log(typeof events[i]);
+    console.log(events[i]);
+    if (events[i] === event) {
+      hasEvent = true;
+      break;
+    }
+  }
+  console.log(hasEvent);
+
+  this.model('User').find({ _id: currentUser.id, events : { $in: event }}, function(err, user){
+    console.log(user);
+    console.log(!!user);
     if (user) {
       console.log("event attended by user");
     } else {

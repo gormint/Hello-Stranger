@@ -7,15 +7,17 @@ module.exports = function(io){
     console.log(req);
     console.log(req.body);
 
+    eventLineupId = req.body.lineupId;
+
     var eventData = {
       title: req.body.title,
-      lineupId: req.body.lineupId,
+      lineupId: eventLineupId,
       description: req.body.description,
-      startDate: startDate,
+      startDate: req.body.startDate,
       venue: {
         name: req.body.venueName,
-        latitude: venueLatitude,
-        longitude: venueLongitude
+        latitude: Number(req.body.venueLatitude),
+        longitude: Number(req.body.venueLongitude)
       }
     }
 
@@ -23,7 +25,7 @@ module.exports = function(io){
       if (err) console.log(err);
       // penName = user.getPenName();
       var penName = user.id;
-      Event.findOne({lineUpId: eventLineUpId}, function(err, event){
+      Event.findOne({lineupId: eventLineupId}, function(err, event){
         if (err) console.log(err);
         console.log(user);
         if (event) {
@@ -37,7 +39,7 @@ module.exports = function(io){
             if (err) console.log(err);
             console.log("event being created in DB");
             console.log(user);
-            user.joinEvent(event);
+            user.joinEvent(newEvent);
             console.log(user.events);
             newEvent.getChatRoom(io, user, penName);
           })
@@ -45,7 +47,8 @@ module.exports = function(io){
       })
     });
     
-    res.send("chat til you drop!");
+    res.render("chat-room");
   }
+
   return {create: create};
 }

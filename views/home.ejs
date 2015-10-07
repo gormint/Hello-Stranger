@@ -25,12 +25,12 @@
                  <li class="title">{{ title }}</li>
                  <form id="js-join-chat-form" action="/events" method="post">
                   <input type="hidden" name="title" value="{{ title }}">
-                  <input type="hidden" name="venueName" value="venueName">
-                  <input type="hidden" name="venueLatitude" value="venueLatitude">
-                  <input type="hidden" name="venueLongitude" value="venueLongitude">
-                  <input type="hidden" name="startDate" value="startDate">
-                  <input type="hidden" name="lineupId" value="lineupId">
-                  <input type="hidden" name="description" value="description">
+                  <input type="hidden" name="venueName" value="{{ venueName }}">
+                  <input type="hidden" name="venueLatitude" value={{ venueLatitude }}>
+                  <input type="hidden" name="venueLongitude" value={{ venueLongitude }}>
+                  <input type="hidden" name="startDate" value={{ startDate }}>
+                  <input type="hidden" name="lineupId" value="{{ lineupId }}">
+                  <input type="hidden" name="description" value="{{ description }}">
                   <input type="submit" value="Join Chat">   
                  </form>
               </div>
