@@ -9,10 +9,11 @@
 </head>
 
 <body>
-  <h1>Hello Stranger</h1>
 
-  <div class="pure-menu pure-menu-horizontal">
-    <a href="/" class="pure-menu-heading pure-menu-link"><h2>Hello Stranger</h2></a>
+<nav>
+  <div id="nav" class="pure-menu pure-menu-horizontal hide">
+    <a href="/home" class="pure-menu-heading pure-menu-link">Hello Stranger</a>
+
     <ul class="pure-menu-list">
       <% if (user) { %>
       <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
@@ -22,6 +23,7 @@
       <% } %>
     </ul>
   </div>
+</nav>
 
   <%- body %>
 
