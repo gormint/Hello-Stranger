@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  console.log("main is ready");
   navigator.geolocation.getCurrentPosition(function(position) {
     getEvents(position.coords.latitude, position.coords.longitude);
   });
