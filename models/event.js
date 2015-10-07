@@ -21,6 +21,9 @@
     console.log("the chatroom for the event is: " + chatroom);
     console.log("type of io inside Event model is: " + io);
     io.on("connection", function (socket) {
+      // var roster = io.clients(chatroom);
+      // console.log("sockets inside the chatroom: " + roster);
+      console.log("this is the socket id: " + socket.id);
       socket.join(chatroom);
       console.log("join in chatroom: " + chatroom);
       socket.on('chat message', function (message) {

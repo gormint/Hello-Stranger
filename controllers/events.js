@@ -3,7 +3,7 @@ module.exports = function(io){
   var User = require("../models/user");
 
   function create(req, res){
-    console.log(req.session.passport.user);
+    console.log("the user id within the passport is: " + req.session.passport.user);
     console.log(req.body);
 
     var eventName = req.body.name;
@@ -12,7 +12,7 @@ module.exports = function(io){
     User.findById(req.session.passport.user, function(err, user){
       if (err) console.log(err);
       // penName = user.getPenName();
-      var penName = "redMonkey";
+      var penName = user.id;
       Event.findOne({lineUpId: eventLineUpId}, function(err, event){
         if (err) console.log(err);
         console.log(user);
