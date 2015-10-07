@@ -13,7 +13,9 @@
 </head>
 
 <body>
-
+<div id="container" class="transparent">
+  <!-- <h1 class="h1">Hello Stranger</h1> -->
+</div>
 <nav>
   <div id="nav" class="pure-menu pure-menu-horizontal hide">
     <a href="/home" class="pure-menu-heading pure-menu-link">Hello Stranger</a>
@@ -21,6 +23,7 @@
     <ul class="pure-menu-list">
       <% if (user) { %>
       <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
+      <li class="pure-menu-item"><a href="" class="pure-menu-link">Back</a>
       <% } else { %> 
       <li class="pure-menu-item"><a href="/login" class="pure-menu-link">Login</a></li>
       <li class="pure-menu-item"><a href="/signup" class="pure-menu-link">Signup</a></li>
@@ -30,6 +33,5 @@
 </nav>
 
   <%- body %>
-
 </body>
 </html>

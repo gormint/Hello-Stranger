@@ -47,7 +47,7 @@ module.exports = function(io){
       })
     });
     
-    res.render("chat-room");
+    res.render("chat-form");
   }
 
   return {create: create};
