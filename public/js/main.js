@@ -112,20 +112,20 @@ function appendEvent(response) {
   //$('#single-event').append(apiDesc);  
   //apiClean = $('#single-event:first').text();
 
-      var eventDetails = {
-        title: eventData.title,
-        description: eventData.description.replace(/(<([^>]+)>)/ig,""),
-        venueName: response.data,
-        venueLatitude: eventLat,
-        venueLongitude: eventLng,
-        startDate: eventData.venues[0].performances[0].startDate,
-        lineupId: eventData.id
-      }
+  var eventDetails = {
+    title: eventData.title,
+    description: eventData.description.replace(/(<([^>]+)>)/ig,""),
+    venueName: eventData.venues[0].name,
+    venueLatitude: eventLat,
+    venueLongitude: eventLng,
+    startDate: eventData.venues[0].performances[0].startDate,
+    lineupId: eventData.id
+  }
 
-      var singleTemplate = $("#single-template").html();
-      Mustache.parse(singleTemplate);
-      var rend = Mustache.render(singleTemplate, eventDetails);
-      $("#list-event").append(rend);
+  var singleTemplate = $("#single-template").html();
+  Mustache.parse(singleTemplate);
+  var rend = Mustache.render(singleTemplate, eventDetails);
+  $("#list-event").append(rend);
   
 
   //$('#single-event').html(apiClean);

@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/helloStranger')
 
 var Event = require("./event");
+var User = require("./user");
 
 // mongoose.connection.db.dropDatabase();
 
@@ -16,6 +17,8 @@ var Event = require("./event");
 //   console.log(event.id + "has been created");
 // })
 
-Event.find({_id: "5613d1dd2aed8ed295790bb0has"}, function(err, event){
+Event.find({_id: "5615431b9a74273741f135cb"}, function(err, event){
   console.log("this is the event: " + event);
+  event.getPastMessages();
 })
+

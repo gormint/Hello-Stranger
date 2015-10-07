@@ -1,29 +1,30 @@
+var mongoose = require("mongoose");
+var Message = require("./message");
 
-  var mongoose = require("mongoose");
-  var Message = require("./message");
+var eventSchema = new mongoose.Schema({
+  title: String,
+  venue: {
+    name: String,
+    Latitude: Number,
+    Longitude: Number
+  },
+  startDate: Date,
+  description: String,
+  lineupId: String
+});
 
-  var eventSchema = new mongoose.Schema({
-    title: String,
-    venue: {
-      name: String,
-      Latitude: Number,
-      Longitude: Number
-    },
-    startDate: Date,
-    description: String,
-    lineUpId: String
-  });
+eventSchema.methods.getChatRoom = function(io, user, penName){
+  var chatroom = this.id;
+  var eventObject = this;
+  var connected = false;
+  io.on("connection", function (socket) {
+    console.log("this is the socket id: " + socket.id);
+    console.log("is this socket already connected?" + connected);
+    if (!connected) {
+      socket.join(chatroom,function(){
+        connected = true;
+      });
 
-  eventSchema.methods.getChatRoom = function(io, user, penName){
-    var chatroom = this.id;
-    var eventObject = this;
-    console.log("the chatroom for the event is: " + chatroom);
-    console.log("type of io inside Event model is: " + io);
-    io.on("connection", function (socket) {
-      // var roster = io.clients(chatroom);
-      // console.log("sockets inside the chatroom: " + roster);
-      console.log("this is the socket id: " + socket.id);
-      socket.join(chatroom);
       console.log("join in chatroom: " + chatroom);
       socket.on('chat message', function (message) {
         console.log("received message: " + message);
@@ -40,9 +41,16 @@
         })
         io.to(chatroom).emit("chat message", penName + ": " +message.message);
       });
-    });
-  }
+    }
+  });
+}
+
+eventSchema.methods.getPastMessages = function(callback){
+  // return Message.find({event: this}, function(err, messages) {
+  //   if (err) console.log(err);
+  //   callback(messages);
+  // })
+}
 
 module.exports = mongoose.model("Event", eventSchema);
-  // return mongoose.model("Event", eventSchema);
 
