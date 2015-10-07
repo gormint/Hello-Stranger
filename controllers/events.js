@@ -4,8 +4,8 @@ module.exports = function(io){
 
   function create(req, res){
     console.log("the user id within the passport is: " + req.session.passport.user);
-    console.log(req);
-    console.log(req.body);
+    // console.log(req);
+    // console.log(req.body);
 
     eventLineupId = req.body.lineupId;
 

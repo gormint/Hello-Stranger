@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var bcrypt   = require('bcrypt-nodejs');
+var _ = require('underscore');
 
 var userSchema = new mongoose.Schema({
   local: {
@@ -24,9 +25,7 @@ userSchema.methods.joinEvent = function(event){
   var events = this.events;
   var hasEvent = false
   for (i=0; i< events.length; i++) {
-    console.log(typeof events[i]);
-    console.log(events[i]);
-    if (events[i] === event) {
+    if (events[i].toString() === event.id ) {
       hasEvent = true;
       break;
     }
@@ -34,7 +33,7 @@ userSchema.methods.joinEvent = function(event){
   console.log(hasEvent);
 
   this.model('User').find({ _id: currentUser.id, events : { $in: event }}, function(err, user){
-    console.log(user);
+    // console.log(user);
     console.log(!!user);
     if (user) {
       console.log("event attended by user");
