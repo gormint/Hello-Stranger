@@ -19,34 +19,29 @@
     <script id="single-template" type="x-template-mustache">
       <div class="event-info" data-eventid="{{ eventid }}">
         <div id="api-description">
-          <div class="pure-u-1-12"></div>
-          <div class="pure-u-10-12">
-            <ul class="inline">
-              <li>
-                <div class="join-chat">
-                  <ul>
-                   <li class="title width-auto">{{ title }}</li>
-                   <li>
-                     <form id="js-join-chat-form" action="/events" method="post" class="width-auto">
-                      <input type="hidden" name="title" value="{{ title }}">
-                      <input type="hidden" name="venueName" value="venueName">
-                      <input type="hidden" name="venueLatitude" value="venueLatitude">
-                      <input type="hidden" name="venueLongitude" value="venueLongitude">
-                      <input type="hidden" name="startDate" value="startDate">
-                      <input type="hidden" name="lineupId" value="lineupId">
-                      <input type="hidden" name="description" value="description">
-                      <input type="submit" value="Join Chat">   
-                     </form>
-                   </li>
-                  <ul>
-                </div>
-              </li>
-              <li class="description">{{ description }}</li>
-            </ul>
-          </div>
-          <div class="pure-u-1-12"></div>
+          <ul>
+            <li>
+              <div class="join-chat">
+                 <li class="title">{{ title }}</li>
+                 <form id="js-join-chat-form" action="/events" method="post">
+                  <input type="hidden" name="title" value="{{ title }}">
+                  <input type="hidden" name="venueName" value="{{ venueName }}">
+                  <input type="hidden" name="venueLatitude" value={{ venueLatitude }}>
+                  <input type="hidden" name="venueLongitude" value={{ venueLongitude }}>
+                  <input type="hidden" name="startDate" value={{ startDate }}>
+                  <input type="hidden" name="lineupId" value="{{ lineupId }}">
+                  <input type="hidden" name="description" value="{{ description }}">
+                  <input type="submit" value="Join Chat">   
+                 </form>
+              </div>
+            </li>
+            <li class="description">{{ description }}</li>
+          </ul>
         </div>
       </div>
     </script>
   </ul>
 </div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="/js/main.js"></script>

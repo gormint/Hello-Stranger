@@ -1,8 +1,6 @@
 $(document).ready(function() {
   console.log("Document chat.js ready!")
 
-  var actualUser = "John";
-
   var socket = io(); //call to localhost
   // In case we would like to use nGrok
   //var socket = io('http://623fba18.ngrok.io');
@@ -13,9 +11,10 @@ $(document).ready(function() {
   });
 
   // Listening to the form that send messages from user 
-  $('#chat-box-form').submit(function(){
+  $('#chat-box-form').submit(function(e){
+    e.preventDefault();
     console.log('click form');
-    socket.emit('chat message', {penName: actualUser, message: $('#message-from-form').val()});
+    socket.emit('chat message', {message: $('#message-from-form').val()});
     msg = $('#message-from-form').val('');
     return false;
   });

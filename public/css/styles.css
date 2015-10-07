@@ -67,7 +67,6 @@ h1 {
 .list-info {
   height: 120px;
 }
-
 .list-distance {
   /*background: url(fallback.png); IF TIME ALLOWS. */
   background-image: url(../images/distance-marker.svg);
