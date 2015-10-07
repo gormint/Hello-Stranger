@@ -1,13 +1,16 @@
 var mongoose = require("mongoose");
 var bcrypt   = require('bcrypt-nodejs');
-var _ = require('underscore');
+var generateName = require('sillyname');
 
 var userSchema = new mongoose.Schema({
   local: {
     email: {type: String, require: true, unique: true},
     password: {type: String, require: true}
   },
-  events: [{type: mongoose.Schema.ObjectId, ref: "Event"}]
+  events: [{
+    attendedEvent: {type: mongoose.Schema.ObjectId, ref: "Event"},
+    penName: String
+  }]
 });
 
 userSchema.methods.encrypt = function(password) {
@@ -20,26 +23,27 @@ userSchema.methods.validPassword = function(password) {
 
 userSchema.methods.joinEvent = function(event){
   var currentUser = this;
-  console.log("event id is: " + event.id);
-  console.log("currentUser is: " + currentUser.id);
   var events = this.events;
-  var hasEvent = false
-  for (i=0; i< events.length; i++) {
-    if (events[i].toString() === event.id ) {
-      hasEvent = true;
+  var hasEvent = 0
+  for (i=1; i<= events.length; i++) {
+    if (events[i-1].attendedEvent.toString() === event.id ) {
+      hasEvent = i;
       break;
     }
   }
   console.log(hasEvent);
   if (hasEvent) {
     console.log("event attended by user");
+    var penName = currentUser.events[hasEvent-1].penName;
   } else {
-    currentUser.events.push(event);
+    var penName = generateName();
+    currentUser.events.push({attendedEvent: event, penName: penName});
     currentUser.save(function(err, user){
       if (err) console.log('error!' + err);
       console.log("event pushed into user");
     })
   }
+  return penName;
 }
 
 var User = mongoose.model("User", userSchema);

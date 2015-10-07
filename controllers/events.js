@@ -24,26 +24,23 @@ module.exports = function(io){
 
     User.findById(req.session.passport.user, function(err, user){
       if (err) console.log(err);
-      // penName = user.getPenName();
-      var penName = user.id;
+      // var penName = user.id;
       Event.findOne({lineupId: eventLineupId}, function(err, event){
         if (err) console.log(err);
         console.log(user);
         if (event) {
-          user.joinEvent(event);
+          var penName = user.joinEvent(event);
           console.log("event already exists in DB");
           console.log(user.events);
           event.getChatRoom(io, user, penName);
           var pastMessages = event.getPastMessages();
-          console.log('I am past messages');
-          console.log(pastMessages);
         } else {
           newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){
             if (err) console.log(err);
             console.log("event being created in DB");
             console.log(user);
-            user.joinEvent(newEvent);
+            var penName = user.joinEvent(newEvent);
             console.log(user.events);
             newEvent.getChatRoom(io, user, penName);
           })
