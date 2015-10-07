@@ -5,10 +5,8 @@ $(document).ready(function(){
   })
   var path = window.location.pathname; // returns path.
   if(path.length > 2 && path != "/signup") {
-  //   $('#nav').hide();
-  // } else {
     $('#nav').slideDown("slow");
-  }
+  } // The above function shows the navbar unless you're on one of the lander pages.
 });
 
 
@@ -41,12 +39,12 @@ function appendEvents(events){
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
       // console.log(eventData);
-      var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng);
+      var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng, 'M');
       var eventDetails = {
         title: eventData.title,
         eventid: eventData.id,
         address: eventData.venues[0].address,
-        distance: distance.toFixed(3)
+        distance: Math.round(distance)
       }
       var template = $("#list-template").html();
       Mustache.parse(template);
@@ -69,6 +67,7 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     distance = distance * 180/Math.PI;
     distance = distance * 60 * 1.1515;
     if (unit=="K") { distance = distance * 1.609344 };
+    if (unit=="M") { distance = distance * 1609.344 };
     return distance;
 }
 
@@ -87,14 +86,9 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
 //     console.log(response);
 //   });
 // });                                                           //
-//temp function for testing/////////////////////////////////////
 
-$('body').on('click', ".events-li", function(event){
-  console.log("Click in li list")
-  console.log($(this));
-  console.log("Click in li list")
+$('body').on( isMobile ? 'touchend':'click', ".js-events-li", function(event){
   var eventid = $(this).data("eventid");
-  console.log(eventid);
 
   urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
 
@@ -134,8 +128,6 @@ function appendEvent(response) {
 
   //$('#single-event').html(apiClean);
   $('#map').removeClass('hide');
-  console.log('event position lat:' + eventLat)
-  console.log('event position lng:' + eventLng)
   initMap(eventLat, eventLng);
 }
 
@@ -208,6 +200,27 @@ function request(url, method, data) {
     dataType: "jsonp",
     data: data
   })
+}
+
+/**
+ * @function       isMobile
+ * @description    a jQuery function to detect mobile devices
+ * @param          userAgents [array]
+ * @return         object
+ */
+
+var userAgents = ['iPad', 'iPhone', 'Android', 'IEMobile', 'BlackBerry'];
+function isMobile(userAgents) {
+    var userAgent,
+        isMobile = { 
+            any: false
+        };
+    $.each(userAgents, function (index) {
+        userAgent = userAgents[index];
+        isMobile[userAgent] = navigator.userAgent.toLowercase().indexOf(userAgent.toLowercase()) > -1;
+        if (isMobile[userAgent]) isMobile.any = true;
+    });
+    return isMobile;
 }
 
 var mapStyling = [{"featureType":"all","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"all","elementType":"geometry","stylers":[{"visibility":"on"},{"saturation":"9"},{"weight":"0.75"}]},{"featureType":"all","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#00ff35"}]},{"featureType":"all","elementType":"geometry.stroke","stylers":[{"visibility":"on"}]},{"featureType":"all","elementType":"labels","stylers":[{"visibility":"simplified"},{"color":"#728790"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#531c1c"}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#9b3232"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#f4eeee"}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"administrative.country","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"visibility":"on"}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"simplified"},{"color":"#aeabab"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f3f4f4"},{"visibility":"simplified"},{"lightness":"2"},{"gamma":"1.78"},{"weight":"1.43"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#8d3e3e"}]},{"featureType":"landscape","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#656e6e"}]},{"featureType":"landscape","elementType":"labels.text.stroke","stylers":[{"hue":"#ff0000"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"off"},{"color":"#f8d7d7"}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"color":"#f5fbf6"}]},{"featureType":"landscape.natural.landcover","elementType":"all","stylers":[{"visibility":"off"},{"color":"#b25e5e"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"visibility":"off"},{"color":"#ff0000"}]},{"featureType":"landscape.natural.terrain","elementType":"all","stylers":[{"visibility":"on"},{"color":"#bcb7b1"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#b1cdb0"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#6ccce5"},{"visibility":"on"}]}]
