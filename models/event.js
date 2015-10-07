@@ -45,8 +45,11 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
   });
 }
 
-eventSchema.methods.getPastMessages = function (){
-  // Message.find({event: this})
+eventSchema.methods.getPastMessages = function(callback){
+  // return Message.find({event: this}, function(err, messages) {
+  //   if (err) console.log(err);
+  //   callback(messages);
+  // })
 }
 
 module.exports = mongoose.model("Event", eventSchema);

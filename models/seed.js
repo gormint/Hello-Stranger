@@ -17,11 +17,8 @@ var User = require("./user");
 //   console.log(event.id + "has been created");
 // })
 
-Event.find({_id: "561530029d41ac12bdcd6ff7"}, function(err, event){
+Event.find({_id: "5615431b9a74273741f135cb"}, function(err, event){
   console.log("this is the event: " + event);
-
-  User.find({ _id: "56152ff99d41ac12bdcd6ff6", events : { $in: event }}, function(err, user){
-    console.log(user);
-  })
+  event.getPastMessages();
 })
 
