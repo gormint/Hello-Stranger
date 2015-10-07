@@ -1,6 +1,7 @@
 module.exports = function(io){
   var Event = require("../models/event");
   var User = require("../models/user");
+  var Message = require("../models/message");
 
   function create(req, res){
     console.log("the user id within the passport is: " + req.session.passport.user);
@@ -33,6 +34,9 @@ module.exports = function(io){
           console.log("event already exists in DB");
           console.log(user.events);
           event.getChatRoom(io, user, penName);
+          var pastMessages = event.getPastMessages();
+          console.log('I am past messages');
+          console.log(pastMessages);
         } else {
           newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){
@@ -44,10 +48,13 @@ module.exports = function(io){
             newEvent.getChatRoom(io, user, penName);
           })
         }
+        Message.find({event: event}, function(err, messages){
+          res.render("chat-room", {messages: messages});
+        })
       })
     });
     
-    res.render("chat-form");
+    // res.render("chat-room", {messages: messages});
   }
 
   return {create: create};

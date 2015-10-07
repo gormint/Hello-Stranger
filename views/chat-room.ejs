@@ -1,7 +1,12 @@
 <!-- CHAT WINDOW -->
 <div id="chat-div">
   <ul id="chat-div-ul">
-    chat window here
+  <% messages %>
+  <% for(i = 0; i < messages.length; i++){ %>
+  <li><%= messages[i].author.penName %></li>
+  <li><%= messages[i].createdAt %></li>
+  <li><%= messages[i].content %></li>
+  <% } %>
   </ul>
 </div>
 
