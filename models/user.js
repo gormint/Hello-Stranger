@@ -31,20 +31,15 @@ userSchema.methods.joinEvent = function(event){
     }
   }
   console.log(hasEvent);
-
-  this.model('User').find({ _id: currentUser.id, events : { $in: event }}, function(err, user){
-    // console.log(user);
-    console.log(!!user);
-    if (user) {
-      console.log("event attended by user");
-    } else {
-      currentUser.events.push(event);
-      currentUser.save(function(err, user){
-        if (err) console.log(err);
-        console.log("event pushed into user");
-      })
-    }
-  })
+  if (hasEvent) {
+    console.log("event attended by user");
+  } else {
+    currentUser.events.push(event);
+    currentUser.save(function(err, user){
+      if (err) console.log('error!' + err);
+      console.log("event pushed into user");
+    })
+  }
 }
 
 var User = mongoose.model("User", userSchema);
