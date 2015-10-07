@@ -89,22 +89,10 @@ function appendEvent(response) {
   //$('#single-event').append(apiDesc);  
   //apiClean = $('#single-event:first').text();
   
-  
-      //apiClean = $('#single-event:first');
-      //console.log("api Clean = " + apiClean);
       console.log("title = " + apiTitle);
       console.log("description = " + apiDesc);
-      var apiDesc = apiDesc.replace(/<br>|<p>|<\/p>/ig,"±±±");
       var apiDesc = apiDesc.replace(/(<([^>]+)>)/ig,"");
-      var retur = String.fromCharCode(13);
-      //retur = String.fromCharCode(65,66,67);
-      console.log("Retur = " + retur);
-      var apiDesc = apiDesc.replace("±±±", retur);
 
-      //pat1 = /\.\n/ig;
-      //var Str = Str.replace(/\./ig, "<br>");
-      //$('#single-event').html(Str);
-      //$('#single-event').html(apiClean);
 
       var eventDetails = {
         title: apiTitle,
