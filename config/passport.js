@@ -57,7 +57,6 @@ module.exports = function(passport) {
 
     // Search for a user with an email from the login form
     User.findOne({ 'local.email' : email }, function(err, user) {
-      // If an exception occurred while verifying the credentials (for example, if the database is not available), done should be invoked with an error, in conventional Node style.
       if (err) { return done(err) };
 
       // If no user has been found

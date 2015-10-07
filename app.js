@@ -1,14 +1,18 @@
 var express = require('express');
 var app = express();
+var server = require('http').createServer(app);
 var port = process.env.PORT || 3000;
 
-var passport     = require('passport');
+// Websocket
+var io = require('socket.io')(server);
+
+var passport = require('passport');
 var logger = require('morgan');
 
 var ejsLayouts = require("express-ejs-layouts");
 var bodyParser = require('body-parser');
 
-var flash        = require('connect-flash');
+var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
@@ -19,6 +23,7 @@ mongoose.connect('mongodb://localhost/helloStranger')
 // App Setup
 app.use(logger('dev'));
 app.use(express.static(__dirname + '/public'));
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false} ))
 app.use(bodyParser.json())
@@ -47,11 +52,21 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 // Routes
-var routes = require('./config/routes');
+var routes = require('./config/routes')(io);
 app.use(routes);
 
-app.listen(port, function() {
+// var io = require("./models/event").io(server);
+
+// Event.findById("5613d1dd2aed8ed295790bb0", function(err, event){
+//   if (err) console.log(err);
+//   event.getChatRoom(io);
+// })
+
+
+server.listen(port, function() {
   console.log('Server started listening on port ', port);
 });
+
+
+

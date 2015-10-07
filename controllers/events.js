@@ -1,30 +1,52 @@
-var request = require("request");
+module.exports = function(io){
+  var Event = require("../models/event");
+  var User = require("../models/user");
 
+  function create(req, res){
+    console.log("the user id within the passport is: " + req.session.passport.user);
+    console.log(req.body);
 
-function index(req, res){
-  console.log(typeof req.query.latitude);
-  var latitude = req.query.latitude;
-  var longitude = req.query.longitude;
+    var eventName = req.body.name;
+    var eventLineUpId = req.body.lineUpId;
 
-  //format current date time into YYYY-MM-DD
-  var date = new Date()
-  var currentDate = String(date.getUTCFullYear()).concat("-", date.getUTCMonth() + 1, "-", date.getUTCDate());
-
-  var lineupUrl = "http://planvine.com/api/v1.7/event/?apiKey="+ process.env.LINEUPNOW_API_KEY + "&lat="+ latitude + "&lng=" + longitude + "&radius=1&startDate=" + currentDate + "&order=date";
-
-  request(lineupUrl, function(error, response, body){
-    events = JSON.parse(response.body).data.filter(isActive);
-    res.json(events);
-  })
-}
-
-function isActive(event){
-  var eventStartDate = new Date(event.venues[0].performances[0].startDate);
-  var currentDate = new Date();
-
-  return (eventStartDate.getDate() === currentDate.getDate()) && (eventStartDate.getFullYear() === currentDate.getFullYear()) && (eventStartDate.getMonth() === currentDate.getMonth());
-}
-
-module.exports = {
-  index: index
+    User.findById(req.session.passport.user, function(err, user){
+      if (err) console.log(err);
+      // penName = user.getPenName();
+      var penName = user.id;
+      Event.findOne({lineUpId: eventLineUpId}, function(err, event){
+        if (err) console.log(err);
+        console.log(user);
+        if (event) {
+          user.events.push(event);
+          user.save(function(err, user){
+            if (err) console.log(err);
+            console.log("event pushed into user");
+          });
+          console.log("event already exists in DB");
+          console.log(user.events);
+          event.getChatRoom(io, user, penName);
+        } else {
+          newEvent = new Event({
+            name: eventName,
+            lineUpId: eventLineUpId
+          })
+          newEvent.save(function(err, newEvent){
+            if (err) console.log(err);
+            console.log("event being created in DB");
+            console.log(user);
+            user.events.push(newEvent);
+            user.save(function(err, user){
+              if (err) console.log(err);
+              console.log("event pushed into user");
+            });
+            console.log(user.events);
+            newEvent.getChatRoom(io, user, penName);
+          })
+        }
+      })
+    });
+    
+    res.send("chat til you drop!");
+  }
+  return {create: create};
 }
