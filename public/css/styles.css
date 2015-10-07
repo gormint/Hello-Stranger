@@ -59,12 +59,21 @@ a.pure-button-primary {
   margin: 1% auto;
 }
 .list-info {
+  height: 120px;
 }
 
 .list-distance {
-  background-color: white; 
+  /*background: url(fallback.png); IF TIME ALLOWS. */
+  background-image: url(../images/distance-marker.svg);
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  background-size: contain;
   text-align: center;
-  vertical-align: top;
+  max-height: 80px;
+}
+.list-distance p {
+  margin-top: 8px;
+  font-size: 12px;
 }
 
 #list-events-ul ul {
