@@ -11,7 +11,7 @@
     },
     startDate: Date,
     description: String,
-    lineUpId: String
+    lineupId: String
   });
 
   eventSchema.methods.getChatRoom = function(io, user, penName){

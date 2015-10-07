@@ -4,10 +4,20 @@ module.exports = function(io){
 
   function create(req, res){
     console.log("the user id within the passport is: " + req.session.passport.user);
+    console.log(req);
     console.log(req.body);
 
-    var eventName = req.body.name;
-    var eventLineUpId = req.body.lineUpId;
+    var eventData = {
+      title: req.body.title,
+      lineupId: req.body.lineupId,
+      description: req.body.description,
+      startDate: startDate,
+      venue: {
+        name: req.body.venueName,
+        latitude: venueLatitude,
+        longitude: venueLongitude
+      }
+    }
 
     User.findById(req.session.passport.user, function(err, user){
       if (err) console.log(err);
@@ -17,28 +27,17 @@ module.exports = function(io){
         if (err) console.log(err);
         console.log(user);
         if (event) {
-          user.events.push(event);
-          user.save(function(err, user){
-            if (err) console.log(err);
-            console.log("event pushed into user");
-          });
+          user.joinEvent(event);
           console.log("event already exists in DB");
           console.log(user.events);
           event.getChatRoom(io, user, penName);
         } else {
-          newEvent = new Event({
-            name: eventName,
-            lineUpId: eventLineUpId
-          })
+          newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){
             if (err) console.log(err);
             console.log("event being created in DB");
             console.log(user);
-            user.events.push(newEvent);
-            user.save(function(err, user){
-              if (err) console.log(err);
-              console.log("event pushed into user");
-            });
+            user.joinEvent(event);
             console.log(user.events);
             newEvent.getChatRoom(io, user, penName);
           })

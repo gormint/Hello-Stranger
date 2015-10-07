@@ -18,7 +18,20 @@ userSchema.methods.validPassword = function(password) {
 };
 
 userSchema.methods.joinEvent = function(event){
-
+  var currentUser = this;
+  console.log("event id is: " + event.id);
+  console.log("currentUser is: " + currentUser.id);
+  User.find({ _id: currentUser.id, events : { $in: event }}, function(err, user){
+    if (user) {
+      console.log("event attended by user");
+    } else {
+      currentUser.events.push(event);
+      currentUser.save(function(err, user){
+        if (err) console.log(err);
+        console.log("event pushed into user");
+      })
+    }
+  })
 }
 
 var User = mongoose.model("User", userSchema);
