@@ -3,6 +3,11 @@ module.exports = function(io){
   var User = require("../models/user");
   var Message = require("../models/message");
 
+
+  function show(req, res){
+    
+  }
+
   function create(req, res){
     console.log("the user id within the passport is: " + req.session.passport.user);
     // console.log(req);
