@@ -23,6 +23,7 @@ mongoose.connect('mongodb://localhost/helloStranger')
 // App Setup
 app.use(logger('dev'));
 app.use(express.static(__dirname + '/public'));
+app.use('/events', express.static(__dirname + '/public'));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false} ))

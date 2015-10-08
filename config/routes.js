@@ -42,6 +42,9 @@ module.exports = function(io){
     .post(authenticatedUser, eventsController.create)
     .get(authenticatedUser, eventsController.index)
 
+  router.route('/events/:id')
+    .get(authenticatedUser, eventsController.show)
+    
   return router;
 }
 

@@ -56,17 +56,20 @@
     </div>
   </script>
 
-
   <script id="historical-list-template" type="x-template-mustache">
     <div class="js-attended-event pure-g" data-eventObjectId="{{ eventObjectId }}">
       <div class="pure-u-3-4 list-info">
         <ul>
+        <a href="/events/{{ eventObjectId }}">
           <li class="title">{{ title }}</li>
           <li class="name">{{ name }}</li>
+        </a>
         </ul>
       </div>
       <div class="pure-u-1-4 list-date">
-        <p>{{ startDate }}</p>
+        <a href="/events/{{ eventObjectId }}">
+          <p>{{ startDate }}</p>
+        </a>
       </div>
     </div>
   </script>

@@ -5,7 +5,21 @@ module.exports = function(io){
 
 
   function show(req, res){
-    
+    console.log('show in controller:')
+    console.log(req.params)
+    console.log(req.params.id)
+    User.findById(req.session.passport.user, function(err, user){
+      if (err) console.log(err);
+      Event.findById(req.params.id, function(err, event){
+        if (err) console.log(err);
+        console.log(user);
+        var penName = user.joinEvent(event);
+        event.getChatRoom(io, user, penName);
+        Message.find({event: event}, function(err, messages){
+          res.render("chat-form", {messages: messages});
+        })
+      })
+    });
   }
 
   function create(req, res){
@@ -40,7 +54,6 @@ module.exports = function(io){
           console.log("event already exists in DB");
           console.log(user.events);
           event.getChatRoom(io, user, penName);
-          var pastMessages = event.getPastMessages();
         } else {
           newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){
@@ -78,6 +91,7 @@ module.exports = function(io){
 
   return {
     create: create, 
-    index: index
+    index: index,
+    show: show
   };
 }
