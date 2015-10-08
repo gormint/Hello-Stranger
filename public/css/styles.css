@@ -22,21 +22,30 @@ html, body {
   background-attachment: fixed;
 
 }
-
+.img {
+  width: 100%;
+  height: auto;
+  margin: 20px;
+}
+a {
+  text-decoration: none;
+  color: #30181C;
+}
+li {
+  list-style: none;
+}
 /* DIV PREPARED TO PUT BACKGROUND IMG */
-#container {
+/*#container {
   background-image: url(../images/chat-women.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+}*/
 .transparent {
   opacity: 0.2;
   height: 0%;
 }
-
-
 
 /* NAVIGATION BAR ===================*/
 nav {
@@ -45,12 +54,21 @@ nav {
 /* LANDER & SIGNUP ===================*/
 /* Some of these are over-rides, which may bite us later */
 .landerform {
-  margin-top: 15%;
+  margin: 0;
   text-align: center;
 }
 .pure-u-1-2 {
   margin-bottom: 2%;
 }
+.ambar-line {
+  margin-bottom: 6px;
+}
+.vertical-ambar {
+  vertical-align: middle;
+}
+/*.centering {
+  margin: 0 auto;
+}*/
 .pure-button-primary {
   background: white;
   color: #6CCCE5;
@@ -93,7 +111,7 @@ a.pure-button-primary {
 /* MAP (Map Styling is in main.js) ===================*/
 
 #map { 
-  height: 40%;
+  height: 60%;
 }
 
 .hide {
@@ -117,6 +135,7 @@ a.pure-button-primary {
   background-size: contain;
   text-align: center;
   max-height: 80px;
+  vertical-align: center;
 }
 .list-distance p {
   margin-top: 8px;
@@ -142,12 +161,14 @@ a.pure-button-primary {
 }
 .title {
   font-weight: bold;
-  font-size: 1.4em;
+  font-size: 1.5em;
+  letter-spacing: 0.2;
 }
 
 .address {
-  font-size: 1.2em;
+  font-size: 1em;
   font-style: oblique;
+  opacity: 0.8;
 }
 
 .join-chat {
@@ -163,19 +184,42 @@ a.pure-button-primary {
 .width-auto {
   width: 40%;
 }
-
+.ambar-gradient {
+  background: rgba(255,255,255,0.5);
+  background: -moz-linear-gradient(top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+  background: -o-linear-gradient(top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+  background: -ms-linear-gradient(top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
+}
 /* CHAT STYLES. ============================*/
 #chat-div {
   height: 400px;
   overflow-y: scroll;
   background-color: rgba(0,0,0,.05);
 }
-
-.chat-box {
-  margin: 10px 20px;
-  padding: 10px;
+.back-plus-shadow {
+  background: rgba(255,255,255,0.3);
+  -webkit-box-shadow: -5px -5px 14px -9px rgba(0,0,0,0.15);
+  -moz-box-shadow: -5px -5px 14px -9px rgba(0,0,0,0.15);
+  box-shadow: -5px -5px 14px -9px rgba(0,0,0,0.15);
 }
-
+.chat-event-header {
+  margin: 10px 20px;
+  padding: 10px 20px;
+}
+.chat-p {
+  font-size: 95%;
+  color: #DDD;
+}
+.chat-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 2em;
+  font-weight: 900;
+  color: #FFF;
+}
 .chat-div-ul {
   width: 100px;
 }
@@ -198,15 +242,19 @@ a.pure-button-primary {
 .border {
   border: 1px 0 0 1px inset #000;
 }
+.chat-box {
+  margin: 10px 20px;
+  padding: 10px;
+}
 .chat-form {
   margin: 10px 1px 10px 20px;
-  -webkit-border-radius: 10px 0 0 10px;
-  -moz-border-radius: 10px 0 0 10px;
-  border-radius: 10px 0 0 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
   padding: .35em 1em;
   font-size: 100%;
-  height: 25px;
-  width: 75%;
+  height: 27px;
+  width: 77.6667%;
 }
 .chat-button {
   margin: 10px 0px 10px 1px;
@@ -221,12 +269,19 @@ a.pure-button-primary {
   -moz-box-shadow: -7px -7px 14px -4px rgba(0,0,0,0.5);
   box-shadow: -7px -7px 14px -4px rgba(0,0,0,0.5);
 }
-.button-width {
+.button-width, .chat-button-width {
   width: 15%;
   font-size: auto;
+  margin: 5px 0;
 }
+
 .align-right {
   text-align: right;
+}
+.chat-penTitle {
+  font-size: 25px;
+  line-height: 22px;
+  font-weight: 900;
 }
 .chat-penName {
   font-size: 15px;
@@ -246,18 +301,18 @@ a.pure-button-primary {
 
 @media (max-width: 600px) {
   nav {
-    width: 400px;
+    width: 200px;
   }
-  .button-width {
-    width: 100%;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+    .button-width {
+    width: 35%;
+  }
+  .chat-button-width {
+    display: none;
   }
   .chat-form {
-    margin: 10px 20px;
+    margin: 0;
     padding: 10px;
-    width: 78%;
+    width: 91.6667%;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -267,22 +322,29 @@ a.pure-button-primary {
 
 @media (max-width: 400px) {
   nav {
-    width: 300px;
+    width: 200px;
   }
   .button-width {
-    width: 100%;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+    width: 35%;
+  }
+  .chat-button-width {
+    display: none;
+  }
+  .chat-box {
+    margin: 10px 0;
+    padding: 10px;
   }
   .chat-form {
-    margin: 10px 20px;
+    margin: 0;
     padding: 10px;
-    width: 78%;
+    width: 91.6667%;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
   }
 }
 
-
+.centering {
+  display: block;
+  margin: 20px auto;
+}
