@@ -47,7 +47,7 @@ $(document).ready(function() {
 
     // Scroll auto of messages
     var $elem = $('#chat-div-ul');
-    $('#chat-div').animate({scrollTop: $elem.height()}, 2500);
+    $('#chat-div').animate({scrollTop: $elem.height()}, 0);
   
 
 
