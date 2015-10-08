@@ -163,6 +163,10 @@ a.pure-button-primary {
   width: 100px;
 }
 
+.chat-div-li {
+  list-style: none;
+}
+
 .radius {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -205,6 +209,18 @@ a.pure-button-primary {
 }
 .align-right {
   text-align: right;
+}
+.chat-penName {
+  font-weight: bold;
+}
+.chat-time {
+  font-weight: normal;
+  margin-left: 5px;
+  color: grey;
+}
+.chat-singleMessage {
+  font-weight: normal;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 600px) {

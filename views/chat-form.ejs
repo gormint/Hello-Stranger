@@ -4,11 +4,17 @@
     <div class="pure-u-10-12">
       <div id="chat-div" class="chat-box radius border inner-shadow">
         <ul id="chat-div-ul" placeholder="There is nobody in this chat-room">
+          
+          <% date = messages[i].createdAt; %>
+          <% date.toLocaleString(); %>
+          
           <% messages %>
           <% for(i = 0; i < messages.length; i++){ %>
-          <li><%= messages[i].author.penName %></li>
-          <li><%= messages[i].createdAt %></li>
-          <li><%= messages[i].content %></li>
+          <li class="chat-div-li">
+          <span class="chat-penName"><%= messages[i].author.penName %></span>
+          <span class="chat-time"><%= date.toLocaleString() %></span>
+          <br><span class="chat-singleMessage"><%= messages[i].content %></span>
+          </li>
           <% } %>
         </ul>
       </div>
