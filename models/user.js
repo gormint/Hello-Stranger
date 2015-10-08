@@ -13,22 +13,6 @@ var userSchema = new mongoose.Schema({
   }]
 });
 
-// userSchema.methods.attendedEvents = function(callback) {
-//   // var currentUser = this;
-//   var promise = User.findOne(this.id).populate('events.attendedEvent').exec(function(err, user) {
-//     console.log('attendedEvents: this is user:')
-//     console.log(user)
-//     return user.events.filter(function(event){
-//       console.log('attendedEvents: this is event:')
-//       console.log(event)
-//       console.log('attendedEvents: this is event.attendedEvent:')
-//       console.log(event.attendedEvent)
-//       return event.attendedEvent;
-//     })
-//   })
-//   return promise;
-// }
-
 userSchema.methods.encrypt = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

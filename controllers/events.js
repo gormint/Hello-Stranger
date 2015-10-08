@@ -28,8 +28,8 @@ module.exports = function(io){
     // console.log(req.body);
 
     eventLineupId = req.body.lineupId;
-    console.log("venue lat is : " + req.body.venueLatitude);
-    console.log("venue lng is : " + req.body.venueLongitude);
+    // console.log("venue lat is : " + req.body.venueLatitude);
+    // console.log("venue lng is : " + req.body.venueLongitude);
 
     var eventData = {
       title: req.body.title,
