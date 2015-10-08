@@ -1,0 +1,23 @@
+<!-- CHAT WINDOW -->
+<div id="chat-div">
+  <ul id="chat-div-ul">
+  <% messages %>
+  <% for(i = 0; i < messages.length; i++){ %>
+  <li><%= messages[i].author.penName %></li>
+  <li><%= messages[i].createdAt %></li>
+  <li><%= messages[i].content %></li>
+  <% } %>
+  </ul>
+</div>
+
+<!-- FORM FOR MESSAGES -->
+<form id="chat-box-form">
+  <input id="message-from-form" autocomplete="off" />
+  <input type="submit" value="send">
+</form>
+
+<!-- BUTTONS FOR SCROLLING AND CLEAN CHAT -->
+<button id="message-nav-up">UP</button>
+<button id="message-nav-down">DOWN</button>
+
+<script src="/js/chat.js"></script>

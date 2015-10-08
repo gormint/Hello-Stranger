@@ -1,0 +1,16 @@
+<% if (message.length > 0) { %>
+  <div class="alert alert-danger"><%= message %></div>
+<% } %>
+
+<form method="post" action="/login" class="pure-form landerform">
+  <div class="pure-u-1-2">
+    <input class="pure-input-1" type="text" name="email" id="email" placeholder="E-mail">
+  </div>
+
+  <div class="pure-u-1-2">
+    <input class="pure-input-1" type="password" name="password" id="password" placeholder="Password">
+  </div>
+
+  <input class="pure-button pure-input-1-2 pure-button-primary" type="submit" value="Sign In">
+  <a href="/signup" class="pure-button pure-input-1-2 pure-button-primary">Not a member?</a>
+</form>

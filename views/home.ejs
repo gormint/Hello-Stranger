@@ -1,0 +1,79 @@
+
+<div id="map" class="hide"></div>
+<div class="pure-u-11-12" id="list-events-ul"></div>
+
+<div class="pure-u-11-12" id="historical-list-events-ul"></div>
+
+<div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
+<div class="pure-u-10-12 pure-u-md-10-12 pure-u-lg-8-12">
+
+  <div id="single-event">
+    <ul id="list-event" class="list-none">
+    </ul>
+  </div>
+
+ 
+</div>
+<div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
+
+
+  <script id="list-template" type="x-template-mustache">
+    <div class="js-events-li pure-g" data-eventid="{{ eventid }}">
+      <div class="pure-u-3-4 list-info">
+        <ul>
+          <li class="title">{{ title }}</li>
+          <li class="address">{{ address }}</li>
+        </ul>
+      </div>
+      <div class="pure-u-1-4 list-distance">
+        <p>{{ distance }}<br>meters</p>
+      </div>
+    </div>
+  </script>
+
+  <script id="single-template" type="x-template-mustache">
+    <div class="event-info" data-eventid="{{ eventid }}">
+      <div id="api-description">
+        <ul>
+          <li>
+            <div class="join-chat">
+               <li class="title">{{ title }}</li>
+               <form id="js-join-chat-form" action="/events" method="post">
+                <input type="hidden" name="title" value="{{ title }}">
+                <input type="hidden" name="venueName" value="{{ venueName }}">
+                <input type="hidden" name="venueLatitude" value={{ venueLatitude }}>
+                <input type="hidden" name="venueLongitude" value={{ venueLongitude }}>
+                <input type="hidden" name="startDate" value={{ startDate }}>
+                <input type="hidden" name="lineupId" value="{{ lineupId }}">
+                <input type="hidden" name="description" value="{{ description }}">
+                <input type="submit" class="pure-button pure-input-1-2 pure-button-primary button-width" value="Chat">   
+               </form>
+            </div>
+          </li>
+          <li class="description">{{ description }}</li>
+        </ul>
+      </div>
+    </div>
+  </script>
+
+  <script id="historical-list-template" type="x-template-mustache">
+    <div class="js-attended-event pure-g" data-eventObjectId="{{ eventObjectId }}">
+      <div class="pure-u-3-4 list-info">
+        <ul>
+        <a href="/events/{{ eventObjectId }}">
+          <li class="title">{{ title }}</li>
+          <li class="name">{{ name }}</li>
+        </a>
+        </ul>
+      </div>
+      <div class="pure-u-1-4 list-date">
+        <a href="/events/{{ eventObjectId }}">
+          <p>{{ startDate }}</p>
+        </a>
+      </div>
+    </div>
+  </script>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
