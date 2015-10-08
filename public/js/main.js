@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 
   // this is from the navbar, it will show historical attended events list.
-  $('body').on("touchstart click", ".js-attended-events", function(e){
+  $('body').on("click", ".js-attended-events", function(e){
     console.log('click!')
     $.ajax({
       url: '/events',
@@ -25,7 +25,7 @@ $(document).ready(function(){
   })
 
   // this is from list of current events, shows event show-page and map. 
-  $('body').on("touchstart click", ".js-events-li", function(e){
+  $('body').on("click", ".js-events-li", function(e){
     var eventid = $(this).data("eventid");
 
     urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
@@ -39,11 +39,6 @@ $(document).ready(function(){
       console.log("got and error: " + error);
     })
   })
-
-  // $('body').on("touchstart click", ".js-attended-event", function(e){
-  //     var eventObjectId = $(this).data("eventObjectId")
-  // }
-
 });
  
 // WETTER THAN AN OTTERS POCKET...
@@ -58,7 +53,7 @@ function getEvents(latitude, longitude){
   console.log(lineupUrl);
   request(lineupUrl, "get");
 }
-
+// See above! 
 function callbackFunction(object) {
   console.log("being called back");
   events = object.data.filter(isActive);
@@ -96,11 +91,8 @@ function appendHistoricalEvents(attendedEvents){
 }
 
 function appendEvents(events){
-  // debugger;
-  // $('#historical-list-events-ul').html('') // clears list data
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
-      // console.log(eventData);
       var distance = calculateDistance(position.coords.latitude, position.coords.longitude, eventData.venues[0].lat, eventData.venues[0].lng, 'M');
       var eventDetails = {
         title: eventData.title,
@@ -139,12 +131,9 @@ function appendEvent(response) {
   var eventLat = eventData.venues[0].lat;
   var eventLng = eventData.venues[0].lng;
   $('#list-events-ul').html('') // clears list data
-  //$('#single-event').append(apiDesc);  
-  //apiClean = $('#single-event:first').text();
-
   var eventDetails = {
     title: eventData.title,
-    description: eventData.description.replace(/(<([^>]+)>)/ig,""),
+    description: eventData.description.replace(/(<([^>]+)>)/ig,""),   // Was apiClean = $('#single-event:first').text();
     venueName: eventData.venues[0].name,
     venueLatitude: eventLat,
     venueLongitude: eventLng,
@@ -156,9 +145,7 @@ function appendEvent(response) {
   Mustache.parse(singleTemplate);
   var rend = Mustache.render(singleTemplate, eventDetails);
   $("#list-event").append(rend);
-  
 
-  //$('#single-event').html(apiClean);
   $('#map').removeClass('hide');
   initMap(eventLat, eventLng);
 }
