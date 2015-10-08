@@ -1,22 +1,18 @@
 <!-- CHAT TITLE -->
-<div class="pure-g">
-    <div class="pure-u-1-12"></div>
-    <div class="pure-u-10-12">
-      <div class="chat-event-header align-right radius" style="background-image: url('../images/chat-women.jpg');background-size: cover;background-position: center;">
-        <p class="chat-p">Your are in the chat room for the event</p>
+<div class="">
+  <div class="pure-g centering pure-u-11-12">
+      <div class="chat-event-header align-right radius" style="background-image: url('<%= imageUrl %>');background-size: cover;background-position: center;">
+        <p class="chat-p">Chat room for the event</p>
         <p class="chat-title"><%= title %></p>
       </div>
-    </div>
-    <div class="pure-u-1-12"></div>
+  </div>
 </div>
 
 <!-- CHAT WINDOW -->
-<div class="pure-g">
-    <div class="pure-u-1-12"></div>
-    <div class="pure-u-10-12">
+<div class="">
+    <div class="pure-g centering pure-u-11-12">
       <div id="chat-div" class="chat-box radius border inner-shadow">
-        <ul id="chat-div-ul" placeholder="There is nobody in this chat-room">
-          
+        <ul id="chat-div-ul" placeholder="There is nobody in this chat-room">       
           <% messages %>
           <% for(i = 0; i < messages.length; i++){ %>
           <% date = messages[i].createdAt; %>
@@ -29,17 +25,14 @@
         </ul>
       </div>
     </div>
-    <div class="pure-u-1-12"></div>
 </div>
-<div class="pure-g">
-    <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
-    <div class="pure-u-10-12 pure-u-md-10-12 pure-u-lg-8-12 inline">
+<div class="">
+    <div class="pure-g centering pure-u-11-12">
       <!-- FORM FOR MESSAGES -->
       <form id="chat-box-form">
         <input  class="chat-form" id="message-from-form" autocomplete="off" />
-        <button class="pure-button pure-input-1-2 pure-button-primary button-width">Send</button>
+        <button class="pure-button pure-input-1-2 pure-button-primary chat-button-width">Send</button>
       </form>
     </div>
-    <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
 </div>
 <script src="/js/chat.js"></script>

@@ -17,6 +17,7 @@ module.exports = function(io){
         Message.find({event: event}, function(err, messages){
           res.render("chat-form", {
             title: event.title,
+            imageUrl: event.imageUrl,
             messages: messages
           });
         })
@@ -65,6 +66,7 @@ module.exports = function(io){
         Message.find({event: event}, function(err, messages){
           res.render("chat-form", {
             title: event.title,
+            imageUrl: event.imageUrl,
             messages: messages
           });
         })
