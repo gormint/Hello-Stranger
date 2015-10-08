@@ -39,8 +39,8 @@ module.exports = function(io){
 
   // Event
   router.route('/events')
-    // .post(eventsController.create);
-    .post(eventsController.create);
+    .post(authenticatedUser, eventsController.create)
+    .get(authenticatedUser, eventsController.index)
 
   return router;
 }
