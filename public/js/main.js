@@ -8,8 +8,46 @@ $(document).ready(function(){
   if(path.length > 2 && path != "/signup") {
     $('#nav').slideDown("slow");
   } // The above function shows the navbar unless you're on one of the lander pages.
-});
 
+
+  // this is from the navbar, it will show historical attended events list.
+  $('body').on("touchstart click", ".js-attended-events", function(e){
+    console.log('click!')
+    $.ajax({
+      url: '/events',
+      method: 'GET',
+      dataType: "json"
+    })
+    .done(function(res) {
+      console.log(res)
+      appendHistoricalEvents(res);
+    })
+    // request('/events', 'GET')
+  })
+
+  // this is from list of current events, shows event show-page and map. 
+  $('body').on("touchstart click", ".js-events-li", function(e){
+    var eventid = $(this).data("eventid");
+
+    urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
+
+    request(urlSingleEvent, "get")
+    .done(function(response){
+      console.log("from the api:" + response);
+      appendEvent(response);
+    })
+    .fail(function(error){
+      console.log("got and error: " + error);
+    })
+  })
+
+  // $('body').on("touchstart click", ".js-attended-event", function(e){
+  //     var eventObjectId = $(this).data("eventObjectId")
+  // }
+
+});
+ 
+// WETTER THAN AN OTTERS POCKET...
 
 function getEvents(latitude, longitude){
   //format current date time into YYYY-MM-DD
@@ -36,7 +74,31 @@ function isActive(event){
   return (eventStartDate.getDate() === currentDate.getDate()) && (eventStartDate.getFullYear() === currentDate.getFullYear()) && (eventStartDate.getMonth() === currentDate.getMonth());
 }
 
+
+function appendHistoricalEvents(attendedEvents){
+  console.log("you're in appendHistoricalEvents()")
+  $("#historical-list-events-ul").empty();
+    $.each(attendedEvents, function(index, eventData){
+      // console.log(eventData);
+      var eventDetails = {
+        title: eventData.attendedEvent.title,
+        name: eventData.attendedEvent.venue.name,
+        startDate: eventData.attendedEvent.startDate,
+        eventObjectId: eventData.attendedEvent._id
+      }
+      $('#list-events-ul').html('') // clears list data
+      var template = $("#historical-list-template").html();
+      Mustache.parse(template);
+      console.log(template);
+      var rendered = Mustache.render(template, eventDetails);
+      $("#historical-list-events-ul").append(rendered);
+    })
+
+}
+
 function appendEvents(events){
+  // debugger;
+  // $('#historical-list-events-ul').html('') // clears list data
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
       // console.log(eventData);
@@ -72,38 +134,6 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     return distance;
 }
 
-
-// $("#js-join-chat-form").on("submit", function(e){                     //
-//   e.preventDefault;                                           //
-//   data = $(this).serialize();
-//   console.log("join chat is clicked");
-//   $.ajax({
-//     url: "/events",
-//     method: "post",
-//     dataType: "json",
-//     data: data
-//   })
-//   .done(function(response){
-//     console.log(response);
-//   });
-// });                                                           //
-
-// isMobile ? 'touchend':'click'
-
-$('body').on("touchstart click", ".js-events-li", function(event){
-  var eventid = $(this).data("eventid");
-
-  urlSingleEvent  = "http://planvine.com/api/v1.7/event/" + eventid +"/?apiKey=d95e605e18384209b386773c5468b15e";
-
-  request(urlSingleEvent, "get")
-  .done(function(response){
-    console.log("from the api:" + response);
-    appendEvent(response);
-  })
-  .fail(function(error){
-    console.log("got and error: " + error);
-  })
-})
 
 function appendEvent(response) {
   var eventData = response.data;
