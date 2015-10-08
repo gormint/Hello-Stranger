@@ -16,7 +16,10 @@ module.exports = function(io){
         var penName = user.joinEvent(event);
         event.getChatRoom(io, user, penName);
         Message.find({event: event}, function(err, messages){
-          res.render("chat-form", {messages: messages});
+          res.render("chat-form", {
+            title: event.title,
+            messages: messages
+          });
         })
       })
     });
@@ -66,7 +69,10 @@ module.exports = function(io){
           })
         }
         Message.find({event: event}, function(err, messages){
-          res.render("chat-form", {messages: messages});
+          res.render("chat-form", {
+            title: event.title,
+            messages: messages
+          });
         })
       })
     });

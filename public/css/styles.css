@@ -170,7 +170,20 @@ a.pure-button-primary {
   overflow-y: scroll;
   background-color: rgba(0,0,0,.05);
 }
+.chat-event-header {
 
+  margin: 10px 20px;
+  padding: 10px 20px;
+}
+.chat-p {
+  font-size: 95%;
+}
+.chat-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 2em;
+  font-weight: 900;
+  color: white;
+}
 .chat-box {
   margin: 10px 20px;
   padding: 10px;
@@ -227,6 +240,11 @@ a.pure-button-primary {
 }
 .align-right {
   text-align: right;
+}
+.chat-penTitle {
+  font-size: 25px;
+  line-height: 22px;
+  font-weight: 900;
 }
 .chat-penName {
   font-size: 15px;
