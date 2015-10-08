@@ -66,7 +66,7 @@ module.exports = function(io){
       })
       console.log('these are attendedEvents')
       console.log(attendedEvents)
-      res.render('test', {attendedEvents: attendedEvents})
+      res.json(attendedEvents);
     });
   }
   

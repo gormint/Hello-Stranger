@@ -34,8 +34,47 @@ function isActive(event){
 
   return (eventStartDate.getDate() === currentDate.getDate()) && (eventStartDate.getFullYear() === currentDate.getFullYear()) && (eventStartDate.getMonth() === currentDate.getMonth());
 }
+// this is from the navbar, it will show historical attended events list.
+$('body').on("touchstart click", ".js-attended-events", function(e){
+    console.log('click!')
+    $.ajax({
+      url: '/events',
+      method: 'GET',
+      dataType: "json"
+    })
+    .done(function(res) {
+      console.log(res)
+      appendHistoricalEvents(res);
+    })
+    .fail(function(err) {
+      console.log('request failed :(')
+    })
+    // request('/events', 'GET')
+
+})
+
+function appendHistoricalEvents(attendedEvents){
+  console.log("you're in appendHistoricalEvents()")
+    $.each(attendedEvents, function(index, eventData){
+      // console.log(eventData);
+      var eventDetails = {
+        title: eventData.attendedEvent.title,
+        name: eventData.attendedEvent.venue.name,
+        startDate: eventData.attendedEvent.startDate,
+        lineupId: eventData.attendedEvent.lineupId
+      }
+      $('#list-events-ul').html('') // clears list data
+      var template = $("#historical-list-template").html();
+      Mustache.parse(template);
+      console.log("we are using mustache");
+      var rendered = Mustache.render(template, eventDetails);
+      $("#historical-list-events-ul").append(rendered);
+    })
+
+}
 
 function appendEvents(events){
+  $('#historical-list-events-ul').html('') // clears list data
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
       // console.log(eventData);
@@ -71,24 +110,7 @@ function calculateDistance(userLatitude, userLongitude, eventLatitude, eventLong
     return distance;
 }
 
-
-// $("#js-join-chat-form").on("submit", function(e){                     //
-//   e.preventDefault;                                           //
-//   data = $(this).serialize();
-//   console.log("join chat is clicked");
-//   $.ajax({
-//     url: "/events",
-//     method: "post",
-//     dataType: "json",
-//     data: data
-//   })
-//   .done(function(response){
-//     console.log(response);
-//   });
-// });                                                           //
-
-// isMobile ? 'touchend':'click'
-
+// this is from list of current events, shows event show-page and map. 
 $('body').on("touchstart click", ".js-events-li", function(event){
   var eventid = $(this).data("eventid");
 
@@ -104,10 +126,12 @@ $('body').on("touchstart click", ".js-events-li", function(event){
   })
 })
 
+
 function appendEvent(response) {
   var eventData = response.data;
   var eventLat = eventData.venues[0].lat;
   var eventLng = eventData.venues[0].lng;
+  $('#historical-list-events-ul').html('') // clears list data
   $('#list-events-ul').html('') // clears list data
   //$('#single-event').append(apiDesc);  
   //apiClean = $('#single-event:first').text();

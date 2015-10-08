@@ -16,6 +16,21 @@
   </script>
 </div>
 
+<div class="pure-u-11-12" id="historical-list-events-ul">
+  <script id="historical-list-template" type="x-template-mustache">
+    <div class="js-attended-events pure-g" data-eventid="{{ eventid }}">
+      <div class="pure-u-3-4 list-info">
+        <ul>
+          <li class="title">{{ title }}</li>
+          <li class="name">{{ name }}</li>
+        </ul>
+      </div>
+      <div class="pure-u-1-4 list-date">
+        <p>{{ startDate }}</p>
+      </div>
+    </div>
+  </script>
+</div>
 
 <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
 <div class="pure-u-10-12 pure-u-md-10-12 pure-u-lg-8-12">
