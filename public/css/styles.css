@@ -11,7 +11,7 @@ html, body {
   background-repeat: no-repeat;
   background-attachment: fixed;*/
 
-/*  background: url(../images/chat-women.jpg) no-repeat center center fixed; 
+/*  background: url(../images/ballet.gif) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -107,7 +107,7 @@ a.pure-button-primary {
   margin: 1% auto;
 }
 .list-info {
-  height: 120px;
+  min-height: 120px;
 }
 .list-distance {
   /*background: url(fallback.png); IF TIME ALLOWS. */
@@ -245,6 +245,9 @@ a.pure-button-primary {
 }
 
 @media (max-width: 600px) {
+  nav {
+    width: 400px;
+  }
   .button-width {
     width: 100%;
     -webkit-border-radius: 10px;
@@ -263,6 +266,9 @@ a.pure-button-primary {
 
 
 @media (max-width: 400px) {
+  nav {
+    width: 300px;
+  }
   .button-width {
     width: 100%;
     -webkit-border-radius: 10px;

@@ -78,6 +78,8 @@ function isActive(event){
 function appendHistoricalEvents(attendedEvents){
   console.log("you're in appendHistoricalEvents()")
   $("#historical-list-events-ul").empty();
+  $("#list-event").empty();
+  $("#map").empty();
     $.each(attendedEvents, function(index, eventData){
       // console.log(eventData);
       var eventDetails = {
