@@ -5,18 +5,6 @@ html, body {
   height: 100%; 
   margin: 0; 
   padding: 0;
-  
-
-/*  background-image: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;*/
-
-/*  background: url(../images/ballet.gif) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
-
   background: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -35,12 +23,67 @@ html, body {
   opacity: 0.2;
   height: 0%;
 }
-
-
-
 /* NAVIGATION BAR ===================*/
-nav {
-  height: 34px;
+.pure-menu-link {
+    color: #6CCCE5;
+}
+.custom-wrapper {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1em;
+    -webkit-font-smoothing: antialiased;
+    height: 2.1em;
+    overflow: hidden;
+    -webkit-transition: height 0.5s;
+    -moz-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    transition: height 0.5s;
+}
+.custom-wrapper.open {
+    height: 200px;
+}
+.custom-menu-3 {
+    text-align: right;
+}
+.custom-toggle {
+    width: 34px;
+    height: 34px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+}
+.custom-toggle .bar {
+    background-color: #6CCCE5;
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 100px;
+    position: absolute;
+    top: 18px;
+    right: 7px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.custom-toggle .bar:first-child {
+    -webkit-transform: translateY(-6px);
+    -moz-transform: translateY(-6px);
+    -ms-transform: translateY(-6px);
+    transform: translateY(-6px);
+}
+.custom-toggle.x .bar {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.custom-toggle.x .bar:first-child {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 /* LANDER & SIGNUP ===================*/
 /* Some of these are over-rides, which may bite us later */
@@ -72,23 +115,6 @@ a.pure-button-primary {
 ::-webkit-input-placeholder {
  text-align: center;
 }
-/* H1 Class for our LANDIGN PAGE
-.h1 {
-  color: white;
-  font-size: 10em;
-  text-align: center;
-  margin-top: 0;
-  text-shadow: 2px 0 0 #000,
-              -2px 0 0 #000,
-              0 2px 0 #000,
-              0 -2px 0 #000,
-              1px 1px #000,
-              -1px -1px 0 #000,
-              1px -1px 0 #000,
-              -1px 1px 0 #000;
-
-}
-*/
 
 /* MAP (Map Styling is in main.js) ===================*/
 
@@ -244,10 +270,7 @@ a.pure-button-primary {
   margin-left: 10px;
 }
 
-@media (max-width: 600px) {
-  nav {
-    width: 400px;
-  }
+@media (max-width: 750px) {
   .button-width {
     width: 100%;
     -webkit-border-radius: 10px;
@@ -262,13 +285,17 @@ a.pure-button-primary {
     -moz-border-radius: 10px;
     border-radius: 10px;
   }
-}
 
-
-@media (max-width: 400px) {
-  nav {
-    width: 300px;
+/* NAV */
+  .custom-menu-3 {
+      text-align: left;
   }
+  .custom-toggle {
+      display: block;
+  }
+
+}
+@media (max-width: 400px) {
   .button-width {
     width: 100%;
     -webkit-border-radius: 10px;
