@@ -4,6 +4,7 @@ $(document).ready(function(){
   })
   // The above function shows the navbar unless you're on one of the lander pages.
   var path = window.location.pathname; // returns path.
+  console.log('the path here is ' + path)
   if(path.length > 2 && path != "/signup") {
     $('#nav').slideDown("slow");
   } 
@@ -68,6 +69,8 @@ function isActive(event){
 function appendHistoricalEvents(attendedEvents){
   console.log("you're in appendHistoricalEvents()")
   $("#historical-list-events-ul").empty();
+  $("#list-event").empty();
+  $("#map").empty();
     $.each(attendedEvents, function(index, eventData){
       // console.log(eventData);
       var eventDetails = {

@@ -73,8 +73,9 @@ module.exports = function(io){
     
     // res.render("chat-room", {messages: messages});
   }
+
   function index(req, res) {
-    User.findOne(req.session.passport.user).populate('events.attendedEvent').exec(function(err, user) {
+    User.findById(req.session.passport.user).populate('events.attendedEvent').exec(function(err, user) {
       console.log('this is a populated user')
       console.log(user)
       var attendedEvents = user.events.filter(function(event) { 

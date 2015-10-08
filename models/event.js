@@ -34,12 +34,21 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
           author: {
             penName: penName,
             author_id: user
-          }
+          },
+          createdAt: new Date()
         })
         newMessage.save(function(err, msg){
           console.log(msg + "msg has been saved");
         })
-        io.to(chatroom).emit("chat message", penName + ": " +message.message);
+        
+        // Converts time now to nicer view
+        var date = new Date();
+        
+        io.to(chatroom).emit("chat message", {
+          penName: penName,
+          message: message.message,
+          date: date.toLocaleTimeString()
+        });
       });
     }
   });
