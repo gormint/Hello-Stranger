@@ -5,8 +5,8 @@ var eventSchema = new mongoose.Schema({
   title: String,
   venue: {
     name: String,
-    Latitude: Number,
-    Longitude: Number
+    latitude: Number,
+    longitude: Number
   },
   startDate: Date,
   description: String,
@@ -43,13 +43,6 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
       });
     }
   });
-}
-
-eventSchema.methods.getPastMessages = function(callback){
-  // return Message.find({event: this}, function(err, messages) {
-  //   if (err) console.log(err);
-  //   callback(messages);
-  // })
 }
 
 module.exports = mongoose.model("Event", eventSchema);
