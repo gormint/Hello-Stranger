@@ -1,9 +1,7 @@
 $(document).ready(function() {
   console.log("Document chat.js ready!")
 
-  var socket = io(); //call to localhost
-  // In case we would like to use nGrok
-  //var socket = io('http://623fba18.ngrok.io');
+  var socket = io();
 
   // Switching on windowsocket
   socket.on('connect', function(){
@@ -43,23 +41,9 @@ $(document).ready(function() {
     // Getting new line scroll down
     $("#chat-div").animate({
       'scrollTop': $("#chat-div")[0].scrollHeight}, 'slow')
-    });
+  });
 
     // Scroll auto of messages
-    var $elem = $('#chat-div-ul');
-    $('#chat-div').animate({scrollTop: $elem.height()}, 0);
-  
-
-
-  // // Buttons to scroll
-  // $('#nav_up').on('click', function(event){
-  //   var $elem = $('#messages');
-  //   console.log('click');
-  //   $('#chat-div').animate({scrollTop: '0px'}, 800);
-  // });
-  // $('#nav_down').on('click', function(event){
-  //   var $elem = $('#messages');
-  //   console.log('click');
-  //   $('#chat-div').animate({scrollTop: $elem.height()}, 800);
-  // });
+  var $elem = $('#chat-div-ul');
+  $('#chat-div').animate({scrollTop: $elem.height()}, 0);
 })

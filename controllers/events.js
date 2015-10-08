@@ -84,8 +84,13 @@ module.exports = function(io){
         return event.attendedEvent;
       })
       console.log('these are attendedEvents')
-      console.log(attendedEvents)
-      res.json(attendedEvents);
+      console.log(attendedEvents);
+      console.log("req.xhr is: " + req.xhr);
+      if (req.xhr) {
+        res.json(attendedEvents);
+      } else {
+        res.render("home");
+      }
     });
   }
   
