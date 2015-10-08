@@ -6,7 +6,7 @@ $(document).ready(function(){
   var path = window.location.pathname; // returns path.
   console.log('the path here is ' + path)
   if(path.length > 2 && path != "/signup") {
-    $('#nav').slideDown("slow");
+    $('#menu').slideDown("slow");
   } 
 
 
@@ -50,7 +50,8 @@ $(document).ready(function(){
 
     request(urlSingleEvent, "get")
     .done(function(response){
-      console.log("from the api:" + response);
+      console.log("from the api:") 
+      console.log(response);
       appendEvent(response);
     })
     .fail(function(error){

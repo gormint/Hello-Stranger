@@ -113,7 +113,8 @@ function appendEvent(response) {
     venueLatitude: eventLat,
     venueLongitude: eventLng,
     startDate: eventData.venues[0].performances[0].startDate,
-    lineupId: eventData.id
+    lineupId: eventData.id,
+    imageUrl: eventData.image.highResolution.url
   }
 
   var singleTemplate = $("#single-template").html();

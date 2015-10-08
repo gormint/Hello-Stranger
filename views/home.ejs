@@ -1,8 +1,7 @@
-
+s
 <div id="map" class="hide"></div>
-<div class="pure-u-11-12" id="list-events-ul"></div>
 
-<div class="pure-u-11-12" id="historical-list-events-ul"></div>
+<div class="pure-u-11-12 pure-g centering" id="list-events-ul"></div>
 
 <div id="chat-room" class="hide">
     <div class="pure-g">
@@ -29,17 +28,16 @@
 </div>
 
 <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
-<div class="pure-u-10-12 pure-u-md-10-12 pure-u-lg-8-12">
+<!-- <div class="pure-u-10-12 pure-u-md-10-12 pure-u-lg-8-12"> -->
 
-<div id="single-event">
-  <ul id="list-event" class="list-none">
-  </ul>
-</div>
+  <div class="pure-u-11-12 centering" id="historical-list-events-ul"></div>
 
- 
-</div>
-<div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
-
+  <div class="pure-u-11-12 centering">
+    <div id="single-event">
+      <ul id="list-event" class="list-none">
+      </ul>
+    </div> 
+  </div>
 
   <script id="single-template" type="x-template-mustache">
     <div class="event-info" data-eventid="{{ eventid }}">
@@ -56,6 +54,7 @@
                 <input type="hidden" name="startDate" value={{ startDate }}>
                 <input type="hidden" name="lineupId" value="{{ lineupId }}">
                 <input type="hidden" name="description" value="{{ description }}">
+                <input type="hidden" name="imageUrl" value="{{ imageUrl }}">
                 <input type="submit" class="pure-button pure-input-1-2 pure-button-primary button-width" value="Chat">   
                </form>
             </div>
@@ -70,7 +69,7 @@
     <div class="pure-g">
       <div class="pure-u-3-4 list-info">
         <ul>
-        <a href="#" class="js-events-li" data-eventid="{{ eventid }}">
+        <a href="#" class="js-events-li " data-eventid="{{ eventid }}">
           <li class="title">{{ title }}</li>
           <li class="address">{{ address }}</li>
         </a>

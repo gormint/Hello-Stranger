@@ -31,7 +31,7 @@ $(document).ready(function() {
 
   socket.on('chat message', function(response){
     console.log("This is msg in chat js: " + response.message);
-    //Formatting Messages before appending them to the page
+    //Formatting Messages before appending to the page
     $('#chat-div-ul').append($('<span class="chat-penName">').text(response.penName));
     $('#chat-div-ul').append($('<span class="chat-time">').text(response.date));
     $('#chat-div-ul').append($('<br><span class="chat-singleMessage">').text(response.message));
