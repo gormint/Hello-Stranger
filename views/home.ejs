@@ -17,20 +17,6 @@
 <div class="pure-u-1-12 pure-u-md-1-12 pure-u-lg-2-12"></div>
 
 
-  <script id="list-template" type="x-template-mustache">
-    <div class="js-events-li pure-g" data-eventid="{{ eventid }}">
-      <div class="pure-u-3-4 list-info">
-        <ul>
-          <li class="title">{{ title }}</li>
-          <li class="address">{{ address }}</li>
-        </ul>
-      </div>
-      <div class="pure-u-1-4 list-distance">
-        <p>{{ distance }}<br>meters</p>
-      </div>
-    </div>
-  </script>
-
   <script id="single-template" type="x-template-mustache">
     <div class="event-info" data-eventid="{{ eventid }}">
       <div id="api-description">
@@ -56,8 +42,26 @@
     </div>
   </script>
 
+  <script id="list-template" type="x-template-mustache">
+    <div class="pure-g">
+      <div class="pure-u-3-4 list-info">
+        <ul>
+        <a href="#" class="js-events-li" data-eventid="{{ eventid }}">
+          <li class="title">{{ title }}</li>
+          <li class="address">{{ address }}</li>
+        </a>
+        </ul>
+      </div>
+      <div class="pure-u-1-4 list-distance">
+        <a href="#" class="js-events-li" data-eventid="{{ eventid }}">
+          <p>{{ distance }}<br>meters</p>
+        </a>
+      </div>
+    </div>
+  </script>
+
   <script id="historical-list-template" type="x-template-mustache">
-    <div class="js-attended-event pure-g" data-eventObjectId="{{ eventObjectId }}">
+    <div class="pure-g" data-eventObjectId="{{ eventObjectId }}">
       <div class="pure-u-3-4 list-info">
         <ul>
         <a href="/events/{{ eventObjectId }}">
@@ -73,7 +77,6 @@
       </div>
     </div>
   </script>
-
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 <script type="text/javascript" src="/js/main.js"></script>

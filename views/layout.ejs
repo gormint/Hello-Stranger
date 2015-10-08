@@ -10,28 +10,14 @@
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.3/mustache.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "d1c3bdd1-fe89-4e6f-bc27-5f0322d4b20b", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 </head>
 
 <body>
-<div id="container" class="transparent">
-  <!-- <h1 class="h1">Hello Stranger</h1> -->
-</div>
-<nav>
-  <div id="nav" class="pure-menu pure-menu-horizontal hide">
-    <a href="/home" class="pure-menu-heading pure-menu-link">Hello Stranger</a>
 
-    <ul class="pure-menu-list">
-      <% if (user) { %>
-      <li class="pure-menu-item"><a href="#" class="pure-menu-link js-attended-events">Your Attended Events</a></li>
-      <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
-      <li class="pure-menu-item"><a href="" class="pure-menu-link">Back</a>
-      <% } else { %> 
-      <li class="pure-menu-item"><a href="/login" class="pure-menu-link">Login</a></li>
-      <li class="pure-menu-item"><a href="/signup" class="pure-menu-link">Signup</a></li>
-      <% } %>
-    </ul>
-  </div>
-</nav>
+  <%- include nav %>
 
   <%- body %>
 </body>

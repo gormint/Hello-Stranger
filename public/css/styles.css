@@ -1,15 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,900);
 /* PAGE BACKGROUND ETC. ===================*/
-html, body { 
+html, body {
+  font-family: 'Lato', sans-serif; 
   height: 100%; 
   margin: 0; 
   padding: 0;
-  background-image: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%);
+  
+
+/*  background-image: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;*/
+
+/*  background: url(../images/ballet.gif) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+
+  background: radial-gradient(circle at 5.43% 82.26%, #5ae8c7, transparent 87%),radial-gradient(circle at 95.52% 15.38%, #6CCCE5, white 87%),radial-gradient(circle at 50% 50%, white, white 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
+
 }
-/* DIV PREPARED TO PUT BACKGROUND IMG
+
+/* DIV PREPARED TO PUT BACKGROUND IMG */
 #container {
-  background: url(../images/chat-women.jpg) no-repeat center center fixed; 
+  background-image: url(../images/chat-women.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -20,7 +36,7 @@ html, body {
   height: 0%;
 }
 
-*/
+
 
 /* NAVIGATION BAR ===================*/
 nav {
@@ -73,6 +89,7 @@ a.pure-button-primary {
 
 }
 */
+
 /* MAP (Map Styling is in main.js) ===================*/
 
 #map { 
@@ -90,7 +107,7 @@ a.pure-button-primary {
   margin: 1% auto;
 }
 .list-info {
-  height: 120px;
+  min-height: 120px;
 }
 .list-distance {
   /*background: url(fallback.png); IF TIME ALLOWS. */
@@ -163,6 +180,11 @@ a.pure-button-primary {
   width: 100px;
 }
 
+.chat-div-li {
+  list-style: none;
+  padding-bottom: 15px;
+}
+
 .radius {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -206,8 +228,26 @@ a.pure-button-primary {
 .align-right {
   text-align: right;
 }
+.chat-penName {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 900;
+}
+.chat-time {
+  font-size: 80%;
+  font-weight: normal;
+  margin-left: 5px;
+  color: grey;
+}
+.chat-singleMessage {
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
 
 @media (max-width: 600px) {
+  nav {
+    width: 400px;
+  }
   .button-width {
     width: 100%;
     -webkit-border-radius: 10px;
@@ -226,6 +266,9 @@ a.pure-button-primary {
 
 
 @media (max-width: 400px) {
+  nav {
+    width: 300px;
+  }
   .button-width {
     width: 100%;
     -webkit-border-radius: 10px;

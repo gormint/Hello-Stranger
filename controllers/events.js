@@ -28,8 +28,8 @@ module.exports = function(io){
     // console.log(req.body);
 
     eventLineupId = req.body.lineupId;
-    console.log("venue lat is : " + req.body.venueLatitude);
-    console.log("venue lng is : " + req.body.venueLongitude);
+    // console.log("venue lat is : " + req.body.venueLatitude);
+    // console.log("venue lng is : " + req.body.venueLongitude);
 
     var eventData = {
       title: req.body.title,
@@ -73,8 +73,9 @@ module.exports = function(io){
     
     // res.render("chat-room", {messages: messages});
   }
+
   function index(req, res) {
-    User.findOne(req.session.passport.user).populate('events.attendedEvent').exec(function(err, user) {
+    User.findById(req.session.passport.user).populate('events.attendedEvent').exec(function(err, user) {
       console.log('this is a populated user')
       console.log(user)
       var attendedEvents = user.events.filter(function(event) { 
