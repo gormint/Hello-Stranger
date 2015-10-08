@@ -1,3 +1,22 @@
+function showChatRoom(messages){
+  $("#historical-list-events-ul").empty();
+  $("#list-event").empty();
+  $("#map").addClass('hide').empty();
+  $.each(messages, function(index, message){
+    var messageData = {
+      date: message.createdAt.toLocaleString(),
+      content: message.content,
+      author: message.author.penName
+    }
+    var template = $("#chat-room-template").html();
+    Mustache.parse(template);
+    console.log(template);
+    var rendered = Mustache.render(template, messageData);
+    $("#chat-div-ul").append(rendered);
+    $("#chat-room").removeClass("hide");
+  })
+}
+
 function getEvents(latitude, longitude){
   //format current date time into YYYY-MM-DD
   console.log("we are getting events");
@@ -28,6 +47,7 @@ function appendHistoricalEvents(attendedEvents){
   $("#historical-list-events-ul").empty();
   $("#list-event").empty();
   $("#map").addClass('hide').empty();
+  $("#chat-div-ul").addClass("hide");
 
   $.each(attendedEvents, function(index, eventData){
     // console.log(eventData);
