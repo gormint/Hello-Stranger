@@ -46,15 +46,13 @@ $('body').on("touchstart click", ".js-attended-events", function(e){
       console.log(res)
       appendHistoricalEvents(res);
     })
-    .fail(function(err) {
-      console.log('request failed :(')
-    })
     // request('/events', 'GET')
 
 })
 
 function appendHistoricalEvents(attendedEvents){
   console.log("you're in appendHistoricalEvents()")
+  $("#historical-list-events-ul").empty();
     $.each(attendedEvents, function(index, eventData){
       // console.log(eventData);
       var eventDetails = {
@@ -66,7 +64,7 @@ function appendHistoricalEvents(attendedEvents){
       $('#list-events-ul').html('') // clears list data
       var template = $("#historical-list-template").html();
       Mustache.parse(template);
-      console.log("we are using mustache");
+      console.log(template);
       var rendered = Mustache.render(template, eventDetails);
       $("#historical-list-events-ul").append(rendered);
     })
@@ -74,7 +72,8 @@ function appendHistoricalEvents(attendedEvents){
 }
 
 function appendEvents(events){
-  $('#historical-list-events-ul').html('') // clears list data
+  // debugger;
+  // $('#historical-list-events-ul').html('') // clears list data
   navigator.geolocation.getCurrentPosition(function(position){
     $.each(events, function(index, eventData){
       // console.log(eventData);
@@ -131,7 +130,6 @@ function appendEvent(response) {
   var eventData = response.data;
   var eventLat = eventData.venues[0].lat;
   var eventLng = eventData.venues[0].lng;
-  $('#historical-list-events-ul').html('') // clears list data
   $('#list-events-ul').html('') // clears list data
   //$('#single-event').append(apiDesc);  
   //apiClean = $('#single-event:first').text();
