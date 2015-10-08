@@ -3,7 +3,6 @@ module.exports = function(io){
   var User = require("../models/user");
   var Message = require("../models/message");
 
-
   function show(req, res){
     console.log('show in controller:')
     console.log(req.params)
@@ -24,18 +23,14 @@ module.exports = function(io){
 
   function create(req, res){
     console.log("the user id within the passport is: " + req.session.passport.user);
-    // console.log(req);
-    // console.log(req.body);
-
-    eventLineupId = req.body.lineupId;
-    // console.log("venue lat is : " + req.body.venueLatitude);
-    // console.log("venue lng is : " + req.body.venueLongitude);
+    var eventLineupId = req.body.lineupId;
 
     var eventData = {
       title: req.body.title,
       lineupId: eventLineupId,
       description: req.body.description,
       startDate: req.body.startDate,
+      imageUrl: req.body.imageUrl,
       venue: {
         name: req.body.venueName,
         latitude: Number(req.body.venueLatitude),
@@ -45,7 +40,6 @@ module.exports = function(io){
 
     User.findById(req.session.passport.user, function(err, user){
       if (err) console.log(err);
-      // var penName = user.id;
       Event.findOne({lineupId: eventLineupId}, function(err, event){
         if (err) console.log(err);
         console.log(user);
@@ -70,8 +64,6 @@ module.exports = function(io){
         })
       })
     });
-    
-    // res.render("chat-room", {messages: messages});
   }
 
   function index(req, res) {
@@ -89,7 +81,6 @@ module.exports = function(io){
     });
   }
   
-
   return {
     create: create, 
     index: index,

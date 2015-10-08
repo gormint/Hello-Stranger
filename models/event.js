@@ -10,7 +10,8 @@ var eventSchema = new mongoose.Schema({
   },
   startDate: Date,
   description: String,
-  lineupId: String
+  lineupId: String,
+  imageUrl: String
 });
 
 eventSchema.methods.getChatRoom = function(io, user, penName){
@@ -28,6 +29,7 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
       console.log("join in chatroom: " + chatroom);
       socket.on('chat message', function (message) {
         console.log("received message: " + message);
+        var date = new Date();
         var newMessage = new Message({
           content: message.message,
           event: eventObject,
@@ -35,14 +37,11 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
             penName: penName,
             author_id: user
           },
-          createdAt: new Date()
+          createdAt: date
         })
         newMessage.save(function(err, msg){
           console.log(msg + "msg has been saved");
         })
-        
-        // Converts time now to nicer view
-        var date = new Date();
         
         io.to(chatroom).emit("chat message", {
           penName: penName,

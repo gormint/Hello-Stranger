@@ -32,7 +32,8 @@ $(document).ready(function(){
 
     request(urlSingleEvent, "get")
     .done(function(response){
-      console.log("from the api:" + response);
+      console.log("from the api:") 
+      console.log(response);
       appendEvent(response);
     })
     .fail(function(error){
@@ -136,7 +137,8 @@ function appendEvent(response) {
     venueLatitude: eventLat,
     venueLongitude: eventLng,
     startDate: eventData.venues[0].performances[0].startDate,
-    lineupId: eventData.id
+    lineupId: eventData.id,
+    imageUrl: eventData.image.highResolution.url
   }
 
   var singleTemplate = $("#single-template").html();
