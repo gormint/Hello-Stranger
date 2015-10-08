@@ -79,23 +79,23 @@ function appendHistoricalEvents(attendedEvents){
   console.log("you're in appendHistoricalEvents()")
   $("#historical-list-events-ul").empty();
   $("#list-event").empty();
-  $("#map").empty();
-    $.each(attendedEvents, function(index, eventData){
-      // console.log(eventData);
-      var eventDetails = {
-        title: eventData.attendedEvent.title,
-        name: eventData.attendedEvent.venue.name,
-        startDate: eventData.attendedEvent.startDate,
-        eventObjectId: eventData.attendedEvent._id
-      }
-      $('#list-events-ul').html('') // clears list data
-      var template = $("#historical-list-template").html();
-      Mustache.parse(template);
-      console.log(template);
-      var rendered = Mustache.render(template, eventDetails);
-      $("#historical-list-events-ul").append(rendered);
-    })
+  $("#map").addClass('hide').empty();
 
+  $.each(attendedEvents, function(index, eventData){
+    // console.log(eventData);
+    var eventDetails = {
+      title: eventData.attendedEvent.title,
+      name: eventData.attendedEvent.venue.name,
+      startDate: eventData.attendedEvent.startDate,
+      eventObjectId: eventData.attendedEvent._id
+    }
+    $('#list-events-ul').html('') // clears list data
+    var template = $("#historical-list-template").html();
+    Mustache.parse(template);
+    console.log(template);
+    var rendered = Mustache.render(template, eventDetails);
+    $("#historical-list-events-ul").append(rendered);
+  })
 }
 
 function appendEvents(events){
@@ -159,7 +159,6 @@ function appendEvent(response) {
   Mustache.parse(singleTemplate);
   var rend = Mustache.render(singleTemplate, eventDetails);
   $("#list-event").append(rend);
-  
 
   //$('#single-event').html(apiClean);
   $('#map').removeClass('hide');
