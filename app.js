@@ -30,10 +30,10 @@ app.use(bodyParser.urlencoded({ extended: false} ))
 app.use(bodyParser.json())
 
 // views setup/engine etc.
-app.use(ejsLayouts);
 app.set('view engine', 'ejs');
-app.engine('ejs', require('ejs').renderFile);
+//app.engine('ejs', require('ejs').renderFile);
 app.set('views', './views');
+app.use(ejsLayouts);
 
 //sessions
 app.use(session({ secret: 'chairman-Yao-and-the-culture-revolutionists' }));
