@@ -15,7 +15,7 @@ module.exports = function(io){
         var penName = user.joinEvent(event);
         event.getChatRoom(io, user, penName);
         Message.find({event: event}, function(err, messages){
-          res.render("chat-form", {
+          res.json({
             title: event.title,
             imageUrl: event.imageUrl,
             messages: messages

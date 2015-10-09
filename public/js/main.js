@@ -36,9 +36,9 @@ $(document).ready(function(){
       dataType: "json",
       data: data
     })
-    .done(function(res) {
-      console.log(res)
-      showChatRoom(res);
+    .done(function(response) {
+      console.log(response);
+      showChatRoom(response);
     })
   }) 
 
@@ -58,5 +58,21 @@ $(document).ready(function(){
       console.log("got and error: " + error);
     })
   })
+
+  $("body").on("click", ".js-attended-event", function(e){
+    e.preventDefault();
+    var eventObjectId = $(this).data("id")
+    var url = "/events/" + eventObjectId;
+    console.log("this is the eventObjectId" + eventObjectId);
+    $.ajax({
+      url: url,
+      method: "get",
+      dataType: "json"
+    })
+    .done(function(response){
+      showChatRoom(response);
+    })
+  })
+
 });
 
