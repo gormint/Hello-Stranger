@@ -53,12 +53,12 @@ module.exports = function(io){
           console.log(user.events);
           storedEvent.getChatRoom(io, user, penName);
           Message.find({event: storedEvent}, function(err, messages){
-          res.json({
-            messages: messages, 
-            title: storedEvent.title, 
-            imageUrl: storedEvent.imageUrl
-          });
-        })
+            res.json({
+              messages: messages, 
+              title: storedEvent.title, 
+              imageUrl: storedEvent.imageUrl
+            });
+          })
         } else {
           newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){

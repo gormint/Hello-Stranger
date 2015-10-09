@@ -30,9 +30,10 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
       console.log("join in chatroom: " + chatroom);
       socket.on('chat message', function (message) {
         console.log("received message: " + message);
+        console.log(typeof message);
         var date = new Date();
         var newMessage = new Message({
-          content: message.message,
+          content: message,
           event: eventObject,
           author: {
             penName: penName,
@@ -46,7 +47,7 @@ eventSchema.methods.getChatRoom = function(io, user, penName){
         
         io.to(chatroom).emit("chat message", {
           penName: penName,
-          message: message.message,
+          message: message,
           date: date.toLocaleTimeString()
         });
       });

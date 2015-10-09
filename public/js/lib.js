@@ -4,6 +4,7 @@ function showChatRoom(chatRoomDetails){
   $("#map").addClass('hide').empty();
 
   var messages = chatRoomDetails.messages;
+  console.log(messages);
   var chatRoomData = {
     title: chatRoomDetails.title,
     imageUrl: chatRoomDetails.imageUrl
