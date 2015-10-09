@@ -15,18 +15,17 @@ $(document).ready(function() {
   } // The above function shows the navbar unless you're on one of the lander pages.
 
   // Listening to the form that send messages from user 
-  $('#chat-box-form').submit(function(e){
+  $('body').on("submit", "#chat-box-form", function(e){
     e.preventDefault();
     console.log('click form');
     
     var valMsg = $('#message-from-form').val();
     console.log('This is message from form: ' + valMsg);
-
-    socket.emit('chat message', {      
-      message: $('#message-from-form').val()
-    });
-    msg = $('#message-from-form').val('');
-    return false;
+    if (valMsg) {
+      socket.emit('chat message', valMsg);
+      $('#message-from-form').val('');
+      return false;
+    }
   });
 
   socket.on('chat message', function(response){

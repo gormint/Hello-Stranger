@@ -1,7 +1,18 @@
-function showChatRoom(messages){
+function showChatRoom(chatRoomDetails){
   $("#historical-list-events-ul").empty();
   $("#list-event").empty();
   $("#map").addClass('hide').empty();
+
+  var messages = chatRoomDetails.messages;
+  var chatRoomData = {
+    title: chatRoomDetails.title,
+    imageUrl: chatRoomDetails.imageUrl
+  }
+  var containerTemplate = $("#chat-container-template").html();
+  Mustache.parse(containerTemplate);
+  var renderedContainer = Mustache.render(containerTemplate, chatRoomData);
+  $("#chat-room").append(renderedContainer);
+
   $.each(messages, function(index, message){
     var messageData = {
       date: message.createdAt.toLocaleString(),
@@ -10,10 +21,8 @@ function showChatRoom(messages){
     }
     var template = $("#chat-room-template").html();
     Mustache.parse(template);
-    console.log(template);
     var rendered = Mustache.render(template, messageData);
     $("#chat-div-ul").append(rendered);
-    $("#chat-room").removeClass("hide");
   })
 }
 
@@ -47,7 +56,7 @@ function appendHistoricalEvents(attendedEvents){
   $("#historical-list-events-ul").empty();
   $("#list-event").empty();
   $("#map").addClass('hide').empty();
-  $("#chat-div-ul").addClass("hide");
+  $("#chat-room").empty();
 
   $.each(attendedEvents, function(index, eventData){
     // console.log(eventData);

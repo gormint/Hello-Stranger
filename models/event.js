@@ -15,6 +15,7 @@ var eventSchema = new mongoose.Schema({
 });
 
 eventSchema.methods.getChatRoom = function(io, user, penName){
+  console.log("getChatRoom method triggered");
   var chatroom = this.id;
   var eventObject = this;
   var connected = false;

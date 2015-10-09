@@ -44,14 +44,21 @@ module.exports = function(io){
 
     User.findById(req.session.passport.user, function(err, user){
       if (err) console.log(err);
-      Event.findOne({lineupId: eventLineupId}, function(err, event){
+      Event.findOne({lineupId: eventLineupId}, function(err, storedEvent){
         if (err) console.log(err);
         console.log(user);
-        if (event) {
-          var penName = user.joinEvent(event);
+        if (storedEvent) {
+          var penName = user.joinEvent(storedEvent);
           console.log("event already exists in DB");
           console.log(user.events);
-          event.getChatRoom(io, user, penName);
+          storedEvent.getChatRoom(io, user, penName);
+          Message.find({event: storedEvent}, function(err, messages){
+          res.json({
+            messages: messages, 
+            title: storedEvent.title, 
+            imageUrl: storedEvent.imageUrl
+          });
+        })
         } else {
           newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){
@@ -61,15 +68,22 @@ module.exports = function(io){
             var penName = user.joinEvent(newEvent);
             console.log(user.events);
             newEvent.getChatRoom(io, user, penName);
+            Message.find({event: newEvent}, function(err, messages){
+              res.json({
+                messages: messages, 
+                title: newEvent.title, 
+                imageUrl: newEvent.imageUrl
+              });
+            })
           })
         }
-        Message.find({event: event}, function(err, messages){
-          res.json({
-            messages: messages, 
-            title: event.title, 
-            imageUrl: event.imageUrl
-          });
-        })
+        // Message.find({event: storedEvent}, function(err, messages){
+        //   res.json({
+        //     messages: messages, 
+        //     title: storedEvent.title, 
+        //     imageUrl: storedEvent.imageUrl
+        //   });
+        // })
       })
     });
   }
