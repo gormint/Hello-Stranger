@@ -52,6 +52,13 @@ module.exports = function(io){
           console.log("event already exists in DB");
           console.log(user.events);
           event.getChatRoom(io, user, penName);
+          Message.find({event: event}, function(err, messages){
+            res.render("chat-form", {
+              title: event.title,
+              imageUrl: event.imageUrl,
+              messages: messages
+            });
+          })
         } else {
           newEvent = new Event(eventData);
           newEvent.save(function(err, newEvent){
@@ -62,14 +69,14 @@ module.exports = function(io){
             console.log(user.events);
             newEvent.getChatRoom(io, user, penName);
           })
+          Message.find({event: newEvent}, function(err, messages){
+            res.render("chat-form", {
+              title: newEvent.title,
+              imageUrl: newEvent.imageUrl,
+              messages: messages
+            });
+          })
         }
-        Message.find({event: event}, function(err, messages){
-          res.render("chat-form", {
-            title: event.title,
-            imageUrl: event.imageUrl,
-            messages: messages
-          });
-        })
       })
     });
   }
