@@ -13,7 +13,7 @@ $(document).ready(function() {
   var path = window.location.pathname; // returns path.
   console.log('the path here is ' + path)
   if(path.length > 2 && path != "/signup") {
-    $('#nav').slideDown("slow");
+    $('#menu').slideDown("slow");
   } // The above function shows the navbar unless you're on one of the lander pages.
 
   // Listening to the form that send messages from user 
