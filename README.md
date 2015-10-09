@@ -54,6 +54,7 @@ Additional technologies:
 * Lineup API (Events information)
 * Google Maps API
 * Sillynames
+* bcrypt
 
 ### Thinking Further Ahead
 
